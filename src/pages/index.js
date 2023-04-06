@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
@@ -20,6 +21,7 @@ export default function Home() {
             Get started by editing&nbsp;
             <code className={styles.code}>src/pages/index.js</code>
           </p>
+          <button type="button" className="btn btn-outline-primary">Primary</button>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
