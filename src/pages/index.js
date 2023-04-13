@@ -130,7 +130,7 @@ function CharacterRoster() {
                     style={{
                         width: '5vw',
                         height: '5vw',
-                        background: 'darkslategray',
+                        background: 'white',
                         border: 'black',
                         outline: 'solid black',
                         cursor: 'pointer',
