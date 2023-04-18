@@ -182,7 +182,7 @@ function MapRoster() {
                         border: 'black',
                         outline: 'solid black',
                         cursor: 'pointer',
-                        margin: '0.5vw',
+                        margin: '0.25vw',
                         boxShadow: buttonStates[index].clicked ? '0px 0px 10px 5px rgba(255,0,0,1)' : 'none',
                     }}
                     onClick={() => handleClick(index)}
