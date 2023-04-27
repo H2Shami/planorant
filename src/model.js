@@ -1,5 +1,5 @@
 //This function will eventually be changed to access the database to get the list of characters
-function getCharacters() {
+const getCharacters = () => {
     let characters;
     characters = [
         "/Character Icons/astra.png",
@@ -25,4 +25,4 @@ function getCharacters() {
     return characters;
 }
 
-export default getCharacters();
+export default getCharacters;

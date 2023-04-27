@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React, { useState, useEffect } from 'react';
-import getCharacters from './model.js';
+import getCharacters from '@/model.js';
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { Carousel } from 'react-responsive-carousel';
@@ -38,34 +38,6 @@ export default function Home() {
 //Toggles between on and off, allowing a maximum selection of 5
 function CharacterRoster() {
 
-    //This function will eventually be changed to access the database to get the list of characters
-    function getCharacters() {
-        let characters;
-        characters = [
-            "/Character Icons/astra.png",
-            "/Character Icons/breach.png",
-            "/Character Icons/brimstone.png",
-            "/Character Icons/Chamber.webp",
-            "/Character Icons/cypher.png",
-            "/Character Icons/fade.png",
-            "/Character Icons/Gekko.webp",
-            "/Character Icons/jett.webp",
-            "/Character Icons/kayo.png",
-            "/Character Icons/killjoy.png",
-            "/Character Icons/neon.webp",
-            "/Character Icons/omen.png",
-            "/Character Icons/phoenix.png",
-            "/Character Icons/raze.png",
-            "/Character Icons/reyna.png",
-            "/Character Icons/sage.png",
-            "/Character Icons/skye.png",
-            "/Character Icons/sova.png",
-            "/Character Icons/viper.png",
-            "/Character Icons/wave.png",
-            "/Character Icons/yoru.png",
-        ];
-        return characters;
-    }
 
     //Grab the characters
     const urls = getCharacters();
@@ -181,7 +153,7 @@ function MapRoster() {
                     style={{
                         width: '14vw',
                         height: '8vw',
-                        background: 'white',
+                        background: 'black',
                         border: 'black',
                         outline: 'solid black',
                         cursor: 'pointer',
