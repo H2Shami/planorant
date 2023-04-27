@@ -1,10 +1,12 @@
 import Head from 'next/head'
 import React, { useState, useEffect } from 'react';
-import getCharacters from '@/model.js';
+import Characters from "@/components/Characters";
+import Maps from "@/components/Maps";
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import Strategies from "@/components/Strategies";
 
 
 
@@ -22,199 +24,15 @@ export default function Home() {
       <main className={styles.main}>
           <container style={{display: 'grid', gridTemplateColumns: '18vw 45vw 30vw'}}>
           <grid>
-              <CharacterRoster/>
+              <Characters/>
           </grid>
-              <container>{MyCarousel()}</container>
+              <container><Strategies/></container>
               <grid>
-                  <MapRoster/>
+                  <Maps/>
               </grid>
       </container>
           </main>
     </>
   )
-}
-
-//This function renders the list of character buttons
-//Toggles between on and off, allowing a maximum selection of 5
-function CharacterRoster() {
-
-
-    //Grab the characters
-    const urls = getCharacters();
-
-    const [buttonStates, setButtonStates] = useState(
-        urls.map(() => ({ clicked: false }))
-    );
-
-    const [clickedCount, setclickedCount] = useState(0);
-
-    const handleClick = (index) => {
-        const newButtonStates = [...buttonStates];
-        const clicked = newButtonStates[index].clicked;
-        if (clickedCount < 5 || clicked) {
-            newButtonStates[index] = {
-                ...newButtonStates[index],
-                clicked: !clicked
-            };
-            setclickedCount(clicked ? clickedCount - 1 : clickedCount + 1);
-            setButtonStates(newButtonStates);
-        }
-    };
-
-    const selectedButtons = buttonStates.reduce((acc, curr, index) => {
-        if (curr.clicked) {
-            acc.push(urls[index]);
-        }
-        return acc;
-    }, []);
-
-    return (
-        <div>
-            {urls.map((item, index) => (
-                <button
-                    key={index}
-                    style={{
-                        width: '5vw',
-                        height: '5vw',
-                        background: 'white',
-                        border: 'black',
-                        outline: 'solid black',
-                        cursor: 'pointer',
-                        margin: '0.5vw',
-                        boxShadow: buttonStates[index].clicked ? '0px 0px 10px 5px rgba(255,0,0,1)' : 'none',
-                    }}
-                    onClick={() => handleClick(index)}
-                >
-                    <img
-                        src={item}
-                        alt="Button image"
-                        style={{ display: 'block', margin: 'auto', maxWidth: '100%', maxHeight: '100%' }}
-                    />
-                </button>
-            ))}
-            <div>
-                Selected Characters: {selectedButtons.join(", ")}
-            </div>
-        </div>
-    );
-}
-
-function MapRoster() {
-
-    //This function will eventually be changed to access the database to get the list of characters
-    function getMaps() {
-        let maps;
-        maps = [
-            "/Map Icons/Ascent.webp",
-            "/Map Icons/Fracture.webp",
-            "/Map Icons/Haven.webp",
-            "/Map Icons/Icebox.webp",
-            "/Map Icons/Lotus.webp",
-            "/Map Icons/Pearl.avif",
-            "/Map Icons/Split.jpeg",
-        ];
-        return maps;
-    }
-
-    //Grab the characters
-    const urls = getMaps();
-
-    const [buttonStates, setButtonStates] = useState(
-        urls.map(() => ({ clicked: false }))
-    );
-
-    const [clickedCount, setclickedCount] = useState(0);
-
-    const handleClick = (index) => {
-        const newButtonStates = [...buttonStates];
-        const clicked = newButtonStates[index].clicked;
-        if (clickedCount < 1 || clicked) {
-            newButtonStates[index] = {
-                ...newButtonStates[index],
-                clicked: !clicked
-            };
-            setclickedCount(clicked ? clickedCount - 1 : clickedCount + 1);
-            setButtonStates(newButtonStates);
-        }
-    };
-
-    const selectedButtons = buttonStates.reduce((acc, curr, index) => {
-        if (curr.clicked) {
-            acc.push(urls[index]);
-        }
-        return acc;
-    }, []);
-
-    return (
-        <div>
-            {urls.map((item, index) => (
-                <button
-                    key={index}
-                    style={{
-                        width: '14vw',
-                        height: '8vw',
-                        background: 'black',
-                        border: 'black',
-                        outline: 'solid black',
-                        cursor: 'pointer',
-                        margin: '0.25vw',
-                        boxShadow: buttonStates[index].clicked ? '0px 0px 10px 5px rgba(255,0,0,1)' : 'none',
-                    }}
-                    onClick={() => handleClick(index)}
-                >
-                    <img
-                        src={item}
-                        alt="Button image"
-                        style={{ display: 'block', margin: 'auto', maxWidth: '100%', maxHeight: '100%' }}
-                    />
-                </button>
-            ))}
-            <div>
-                Selected Maps: {selectedButtons.join(", ")}
-            </div>
-        </div>
-    );
-}
-
-function MyCarousel() {
-    const customPrevArrow = (onClickHandler, hasPrev, label) => {
-        return (
-            hasPrev && (
-                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', left: '5%', backgroundColor: 'transparent', borderRadius: '50%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(-50%,-50%)', padding: '10px' }}>
-                    <span style={{ fontSize: '2rem' }}>&lt;</span>
-                    <span style={{ fontSize: '1rem', marginLeft: '5px' }}>Prev</span>
-                </button>
-            )
-        );
-    };
-
-    const customNextArrow = (onClickHandler, hasNext, label) => {
-        return (
-            hasNext && (
-                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', right: '5%', backgroundColor: 'transparent', borderRadius: '25%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(50%,-50%)', padding: '10px' }}>
-                    <span style={{ fontSize: '2rem' }}>&gt;</span>
-                    <span style={{ fontSize: '1rem', marginLeft: '5px' }}>Next</span>
-                </button>
-            )
-        );
-    };
-
-    return (
-        <Carousel
-            renderArrowPrev={customPrevArrow}
-            renderArrowNext={customNextArrow}
-            showThumbs={false}
-        >
-            <div>
-                <img src="/Map Icons/Haven.webp" alt="Slide 1" />
-            </div>
-            <div>
-                <img src="/Map Icons/Icebox.webp" alt="Slide 2" />
-            </div>
-            <div>
-                <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
-            </div>
-        </Carousel>
-    );
 }
 
