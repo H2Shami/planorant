@@ -2,12 +2,9 @@ import Head from 'next/head'
 import React, { useState, useEffect } from 'react';
 import Characters from "@/components/Characters";
 import Maps from "@/components/Maps";
+import Strategies from "@/components/Strategies";
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import Strategies from "@/components/Strategies";
-
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -26,7 +23,7 @@ export default function Home() {
           <grid>
               <Characters/>
           </grid>
-              <container><Strategies/></container>
+              <Strategies/>
               <grid>
                   <Maps/>
               </grid>
