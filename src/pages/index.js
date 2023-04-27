@@ -1,9 +1,12 @@
-import 'bootstrap/dist/css/bootstrap.css';
 import Head from 'next/head'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import getCharacters from './model.js';
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +24,7 @@ export default function Home() {
           <grid>
               <CharacterRoster/>
           </grid>
-              <container></container>
+              <container>{MyCarousel()}</container>
               <grid>
                   <MapRoster/>
               </grid>
@@ -200,3 +203,46 @@ function MapRoster() {
         </div>
     );
 }
+
+function MyCarousel() {
+    const customPrevArrow = (onClickHandler, hasPrev, label) => {
+        return (
+            hasPrev && (
+                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', left: '5%', backgroundColor: 'transparent', borderRadius: '50%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(-50%,-50%)', padding: '10px' }}>
+                    <span style={{ fontSize: '2rem' }}>&lt;</span>
+                    <span style={{ fontSize: '1rem', marginLeft: '5px' }}>Prev</span>
+                </button>
+            )
+        );
+    };
+
+    const customNextArrow = (onClickHandler, hasNext, label) => {
+        return (
+            hasNext && (
+                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', right: '5%', backgroundColor: 'transparent', borderRadius: '25%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(50%,-50%)', padding: '10px' }}>
+                    <span style={{ fontSize: '2rem' }}>&gt;</span>
+                    <span style={{ fontSize: '1rem', marginLeft: '5px' }}>Next</span>
+                </button>
+            )
+        );
+    };
+
+    return (
+        <Carousel
+            renderArrowPrev={customPrevArrow}
+            renderArrowNext={customNextArrow}
+            showThumbs={false}
+        >
+            <div>
+                <img src="/Map Icons/Haven.webp" alt="Slide 1" />
+            </div>
+            <div>
+                <img src="/Map Icons/Icebox.webp" alt="Slide 2" />
+            </div>
+            <div>
+                <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
+            </div>
+        </Carousel>
+    );
+}
+
