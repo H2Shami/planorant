@@ -1,22 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import getCharacters from '@/model.js';
+import { getMaps } from '@/model.js';
 
 const Maps = () => {
-
-    //This function will eventually be changed to access the database to get the list of characters
-    function getMaps() {
-        let maps;
-        maps = [
-            "/Map Icons/Ascent.webp",
-            "/Map Icons/Fracture.webp",
-            "/Map Icons/Haven.webp",
-            "/Map Icons/Icebox.webp",
-            "/Map Icons/Lotus.webp",
-            "/Map Icons/Pearl.avif",
-            "/Map Icons/Split.jpeg",
-        ];
-        return maps;
-    }
 
     //Grab the characters
     const urls = getMaps();

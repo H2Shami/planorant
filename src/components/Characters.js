@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import getCharacters from '@/model.js';
+import { getCharacters } from '@/model.js';
 
 //This function renders the list of character buttons
 //Toggles between on and off, allowing a maximum selection of 5

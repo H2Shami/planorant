@@ -1,5 +1,5 @@
 //This function will eventually be changed to access the database to get the list of characters
-const getCharacters = () => {
+export const getCharacters = () => {
     let characters;
     characters = [
         "/Character Icons/astra.png",
@@ -27,4 +27,18 @@ const getCharacters = () => {
     return characters;
 }
 
-export default getCharacters;
+
+//This function will eventually be changed to access the database to get the list of characters
+export const getMaps = () => {
+    let maps;
+    maps = [
+        "/Map Icons/Ascent.webp",
+        "/Map Icons/Fracture.webp",
+        "/Map Icons/Haven.webp",
+        "/Map Icons/Icebox.webp",
+        "/Map Icons/Lotus.webp",
+        "/Map Icons/Pearl.avif",
+        "/Map Icons/Split.jpeg",
+    ];
+    return maps;
+}
