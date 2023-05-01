@@ -42,3 +42,16 @@ export const getMaps = () => {
     ];
     return maps;
 }
+
+// // pages/api/users.js
+// import pool from './db';
+//
+// export default async (req, res) => {
+//     try {
+//         const result = await pool.query('SELECT * FROM users');
+//         res.status(200).json(result.rows);
+//     } catch (err) {
+//         console.error(err);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// };

@@ -20,13 +20,9 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
           <container style={{display: 'grid', gridTemplateColumns: '18vw 45vw 30vw'}}>
-          <grid>
               <Characters/>
-          </grid>
               <Strategies/>
-              <grid>
-                  <Maps/>
-              </grid>
+              <Maps/>
       </container>
           </main>
     </>
