@@ -214,49 +214,19 @@ function MapRoster() {
     );
 }
 
-// function MyCarousel() {
-//     const customPrevArrow = (onClickHandler, hasPrev, label) => {
-//         return (
-//             hasPrev && (
-//                 <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', left: '5%', backgroundColor: 'transparent', borderRadius: '50%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(-50%,-50%)', padding: '10px' }}>
-//                     <span style={{ fontSize: '2rem' }}>&lt;</span>
-//                     <span style={{ fontSize: '1rem', marginLeft: '5px' }}>Prev</span>
-//                 </button>
-//             )
-//         );
-//     };
-//
-//     const customNextArrow = (onClickHandler, hasNext, label) => {
-//         return (
-//             hasNext && (
-//                 <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', right: '5%', backgroundColor: 'transparent', borderRadius: '25%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(50%,-50%)', padding: '10px' }}>
-//                     <span style={{ fontSize: '2rem' }}>&gt;</span>
-//                     <span style={{ fontSize: '1rem', marginLeft: '5px' }}>Next</span>
-//                 </button>
-//             )
-//         );
-//     };
-//
-//     return (
-//         <Carousel
-//             renderArrowPrev={customPrevArrow}
-//             renderArrowNext={customNextArrow}
-//             showThumbs={false}
-//         >
-//             <div>
-//                 <MarketSplit />
-//             </div>
-//             <div>
-//                 <img src="/Map Icons/Icebox.webp" alt="Slide 2" />
-//             </div>
-//             <div>
-//                 <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
-//             </div>
-//         </Carousel>
-//     );
-// }
-
 const agents = {
+    controllers:[
+
+    ],
+    initiators:[
+
+    ],
+    sentinel:[
+
+    ],
+    duelist: [
+
+    ],
     omen: {
         name: 'omen',
         image: '/Character Icons/omen.png',
@@ -323,108 +293,18 @@ const agents = {
 
 function MarketSplit() {
     const [mapImage, setMapImage] = useState({ x: 0, y: 0 }); // Minimap
-    const [smokesAgentXY, setSmokesAgentXY] = useState({ x: 100, y: 360 });
-    const [initiatorAgentXY, setInitiatorAgentXY] = useState({ x: 170, y: 280 });
-    const [sentinelAgentXY, setSentinelAgentXY] = useState({ x: 220, y: 300 });
-    const [duelistAgentXY, setDuelistAgentXY] = useState({ x: 25, y: 370 });
-    const [flashAgentXY, setFlashAgentXY] = useState({ x: 75, y: 400 });
-    const [smokeFirstXY, setSmokeFirstXY] = useState({ x:140, y: 90 });
-    const [smokeSecondXY, setSmokeSecondXY] = useState({ x: 80, y: 320 });
-    const [initiatorAbilityXY, setInitiatorAbilityXY] = useState({ x: 10, y: 250 });
-    const [sentinelAbilityXY, setSentinelAbilityXY] = useState({ x: 230, y: 350 });
-    const [duelistAbilityXY, setDuelistAbilityXY] = useState({ x: 5, y: 140 });
-    const [flashAbilityXY, setFlashAbilityXY] = useState({ x: 40, y: 180 });
+    const [smokesAgentXY, setSmokesAgentXY] = useState({ x: 290, y: 445 });
+    const [initiatorAgentXY, setInitiatorAgentXY] = useState({ x: 200, y: 450 });
+    const [sentinelAgentXY, setSentinelAgentXY] = useState({ x: 160, y: 450 });
+    const [duelistAgentXY, setDuelistAgentXY] = useState({  x: 350, y: 450 });
+    const [flashAgentXY, setFlashAgentXY] = useState({  x: 320, y: 460 });
+    const [smokeFirstXY, setSmokeFirstXY] = useState({ x:245, y: 130 });
+    const [smokeSecondXY, setSmokeSecondXY] = useState({ x: 490, y: 380 });
+    const [initiatorAbilityXY, setInitiatorAbilityXY] = useState({ x: 420, y: 310 });
+    const [sentinelAbilityXY, setSentinelAbilityXY] = useState({ x: 150, y: 400 });
+    const [duelistAbilityXY, setDuelistAbilityXY] = useState({ x: 400, y: 180 });
+    const [flashAbilityXY, setFlashAbilityXY] = useState({ x: 360, y: 240 });
 
-    // useEffect(() => {
-    //     function handleResize() {
-    //         const mapImage = document.getElementById('mapImage');
-    //         const smokesAgentXY = document.getElementById('smokesAgentXY');
-    //         const initiatorAgentXY = document.getElementById('initiatorAgentXY');
-    //         const sentinelAgentXY = document.getElementById('sentinelAgentXY');
-    //         const duelistAgentXY = document.getElementById('duelistAgentXY');
-    //         const flashAgentXY = document.getElementById('flashAgentXY');
-    //         const smokeFirstXY = document.getElementById('smokeFirstXY');
-    //         const smokeSecondXY = document.getElementById('smokeSecondXY');
-    //         const initiatorAbilityXY = document.getElementById('initiatorAbilityXY');
-    //         const sentinelAbilityXY = document.getElementById('sentinelAbilityXY');
-    //         const duelistAbilityXY = document.getElementById('duelistAbilityXY');
-    //         const flashAbilityXY = document.getElementById('flashAbilityXY');
-    //
-    //         const container = document.getElementById('container');
-    //         const containerRect = container.getBoundingClientRect();
-    //         const scalingFactor = container.offsetWidth / containerRect.width;
-    //
-    //         const mapImageRect = mapImage.getBoundingClientRect();
-    //         const smokesAgentXYRect = smokesAgentXY.getBoundingClientRect();
-    //         const initiatorAgentXYRect = initiatorAgentXY.getBoundingClientRect();
-    //         const sentinelAgentXYRect = sentinelAgentXY.getBoundingClientRect();
-    //         const duelistAgentXYRect = duelistAgentXY.getBoundingClientRect();
-    //         const flashAgentXYRect = flashAgentXY.getBoundingClientRect();
-    //         const smokeFirstXYRect = smokeFirstXY.getBoundingClientRect();
-    //         const smokeSecondXYRect = smokeSecondXY.getBoundingClientRect();
-    //         const initiatorAbilityXYRect = initiatorAbilityXY.getBoundingClientRect();
-    //         const sentinelAbilityXYRect = sentinelAbilityXY.getBoundingClientRect();
-    //         const duelistAbilityXYRect = duelistAbilityXY.getBoundingClientRect();
-    //         const flashAbilityXYRect = flashAbilityXY.getBoundingClientRect();
-    //
-    //         setMapImage({
-    //             x: mapImageRect.left * scalingFactor,
-    //             y: mapImageRect.top * scalingFactor,
-    //         });
-    //         setSmokesAgentXY({
-    //             x: (sentinelAgentXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (sentinelAgentXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setFlashAgentXY({
-    //             x: (duelistAgentXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (duelistAgentXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setInitiatorAgentXY({
-    //             x: (flashAgentXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (flashAgentXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setSentinelAgentXY({
-    //             x: (smokeFirstXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (smokeFirstXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setSmokeFirstXY({
-    //             x: (smokesAgentXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (smokesAgentXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setSmokeSecondXY({
-    //             x: (initiatorAgentXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (initiatorAgentXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setInitiatorAbilityXY({
-    //             x: (smokeSecondXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (smokeSecondXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setSentinelAbilityXY({
-    //             x: (initiatorAbilityXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (initiatorAbilityXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setFlashAbilityXY({
-    //             x: (sentinelAbilityXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (sentinelAbilityXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setDuelistAgentXY({
-    //             x: (duelistAbilityXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (duelistAbilityXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //         setDuelistAbilityXY({
-    //             x: (flashAbilityXYRect.left - mapImageRect.left) * scalingFactor,
-    //             y: (flashAbilityXYRect.top - mapImageRect.top) * scalingFactor,
-    //         });
-    //     }
-    //
-    //     handleResize();
-    //
-    //     window.addEventListener('resize', handleResize);
-    //
-    //     return () => {
-    //         window.removeEventListener('resize', handleResize);
-    //     };
-    // }, []);
 
     return (
         <div id="container" className="image-container">
@@ -586,102 +466,14 @@ function CatSplit() {
     const [smokesAgentXY, setSmokesAgentXY] = useState({ x: 480, y: 430 });
     const [initiatorAgentXY, setInitiatorAgentXY] = useState({ x: 640, y: 470 });
     const [sentinelAgentXY, setSentinelAgentXY] = useState({ x: 620, y: 480 });
-    const [duelistAgentXY, setDuelistAgentXY] = useState({ x: 25, y: 370 });
+    const [duelistAgentXY, setDuelistAgentXY] = useState({ x: 530, y: 390 });
     const [flashAgentXY, setFlashAgentXY] = useState({ x: 500, y: 400 });
     const [smokeFirstXY, setSmokeFirstXY] = useState({ x:393, y: 340 });
     const [smokeSecondXY, setSmokeSecondXY] = useState({ x: 593, y: 275 });
-    const [initiatorAbilityXY, setInitiatorAbilityXY] = useState({ x: 10, y: 250 });
-    const [sentinelAbilityXY, setSentinelAbilityXY] = useState({ x: 230, y: 350 });
-    const [duelistAbilityXY, setDuelistAbilityXY] = useState({ x: 5, y: 140 });
-    const [flashAbilityXY, setFlashAbilityXY] = useState({ x: 40, y: 180 });
-
-    // useEffect(() => {
-    //     function handleResize() {
-    //         const image1 = document.getElementById('image1');
-    //         const image2 = document.getElementById('image2');
-    //         const image3 = document.getElementById('image3');
-    //         const image4 = document.getElementById('image4');
-    //         const image5 = document.getElementById('image5');
-    //         const image6 = document.getElementById('image6');
-    //         const image7 = document.getElementById('image7');
-    //         const image8 = document.getElementById('image8');
-    //         const image9 = document.getElementById('image9');
-    //         const image10 = document.getElementById('image10');
-    //         const image11 = document.getElementById('image11');
-    //         const image12 = document.getElementById('image12');
-    //         const container = document.getElementById('container');
-    //         const containerRect = container.getBoundingClientRect();
-    //         const scalingFactor = container.offsetWidth / containerRect.width;
-    //         const image1Rect = image1.getBoundingClientRect();
-    //         const image2Rect = image2.getBoundingClientRect();
-    //         const image3Rect = image3.getBoundingClientRect();
-    //         const image4Rect = image4.getBoundingClientRect();
-    //         const image5Rect = image5.getBoundingClientRect();
-    //         const image6Rect = image6.getBoundingClientRect();
-    //         const image7Rect = image7.getBoundingClientRect();
-    //         const image8Rect = image8.getBoundingClientRect();
-    //         const image9Rect = image9.getBoundingClientRect();
-    //         const image10Rect = image10.getBoundingClientRect();
-    //         const image11Rect = image11.getBoundingClientRect();
-    //         const image12Rect = image12.getBoundingClientRect();
-    //         setImage1Position({
-    //             x: image1Rect.left * scalingFactor,
-    //             y: image1Rect.top * scalingFactor,
-    //         });
-    //         setImage2Position({
-    //             x: (image2Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image2Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage3Position({
-    //             x: (image3Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image3Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage4Position({
-    //             x: (image4Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image4Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage5Position({
-    //             x: (image5Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image5Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage6Position({
-    //             x: (image6Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image6Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage7Position({
-    //             x: (image7Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image7Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage8Position({
-    //             x: (image8Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image8Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage9Position({
-    //             x: (image9Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image9Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage10Position({
-    //             x: (image10Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image10Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage11Position({
-    //             x: (image11Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image11Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //         setImage12Position({
-    //             x: (image12Rect.left - image1Rect.left) * scalingFactor,
-    //             y: (image12Rect.top - image1Rect.top) * scalingFactor,
-    //         });
-    //     }
-    //
-    //     handleResize();
-    //
-    //     window.addEventListener('resize', handleResize);
-    //
-    //     return () => {
-    //         window.removeEventListener('resize', handleResize);
-    //     };
-    // }, []);
+    const [initiatorAbilityXY, setInitiatorAbilityXY] = useState({ x: 700, y: 390 });
+    const [sentinelAbilityXY, setSentinelAbilityXY] = useState({ x: 565, y: 580 });
+    const [duelistAbilityXY, setDuelistAbilityXY] = useState({ x: 700, y: 200 });
+    const [flashAbilityXY, setFlashAbilityXY] = useState({ x: 560, y: 340 });
 
     return (
         <div id="container" className="image-container">
