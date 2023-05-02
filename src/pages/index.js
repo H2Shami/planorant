@@ -277,107 +277,573 @@ const agents = {
                 image: "/Ability%20Icons/brim.png"
             }
         ]
+    },
+    jett:{
+        name: 'jett',
+        image: '/Character Icons/jett.webp',
+        abilities: [
+            {
+                name: 'smoke',
+                image: "/Ability%20Icons/jett.png"
+            }
+        ]
+    },
+    killjoy:{
+        name: 'killjoy',
+        image: '/Character Icons/killjoy.png',
+        abilities: [
+            {
+                name: 'trip',
+                image: "/Ability%20Icons/alarmbot.png"
+            }
+        ]
+    },
+    sova:{
+        name: 'sova',
+        image: '/Character Icons/sova.png',
+        abilities: [
+            {
+                name: 'dart',
+                image: "/Ability%20Icons/dart2.png"
+            }
+        ]
+    },
+    reyna:{
+        name: 'reyna',
+        image: '/Character Icons/reyna.png',
+        abilities: [
+            {
+                name: 'flash',
+                image: "/Ability%20Icons/reynaFlash.png"
+            }
+        ]
     }
     // other agents here...
 };
 
+function MarketSplit() {
+    const [mapImage, setMapImage] = useState({ x: 0, y: 0 }); // Minimap
+    const [smokesAgentXY, setSmokesAgentXY] = useState({ x: 100, y: 360 });
+    const [initiatorAgentXY, setInitiatorAgentXY] = useState({ x: 170, y: 280 });
+    const [sentinelAgentXY, setSentinelAgentXY] = useState({ x: 220, y: 300 });
+    const [duelistAgentXY, setDuelistAgentXY] = useState({ x: 25, y: 370 });
+    const [flashAgentXY, setFlashAgentXY] = useState({ x: 75, y: 400 });
+    const [smokeFirstXY, setSmokeFirstXY] = useState({ x:140, y: 90 });
+    const [smokeSecondXY, setSmokeSecondXY] = useState({ x: 80, y: 320 });
+    const [initiatorAbilityXY, setInitiatorAbilityXY] = useState({ x: 10, y: 250 });
+    const [sentinelAbilityXY, setSentinelAbilityXY] = useState({ x: 230, y: 350 });
+    const [duelistAbilityXY, setDuelistAbilityXY] = useState({ x: 5, y: 140 });
+    const [flashAbilityXY, setFlashAbilityXY] = useState({ x: 40, y: 180 });
+
+    // useEffect(() => {
+    //     function handleResize() {
+    //         const mapImage = document.getElementById('mapImage');
+    //         const smokesAgentXY = document.getElementById('smokesAgentXY');
+    //         const initiatorAgentXY = document.getElementById('initiatorAgentXY');
+    //         const sentinelAgentXY = document.getElementById('sentinelAgentXY');
+    //         const duelistAgentXY = document.getElementById('duelistAgentXY');
+    //         const flashAgentXY = document.getElementById('flashAgentXY');
+    //         const smokeFirstXY = document.getElementById('smokeFirstXY');
+    //         const smokeSecondXY = document.getElementById('smokeSecondXY');
+    //         const initiatorAbilityXY = document.getElementById('initiatorAbilityXY');
+    //         const sentinelAbilityXY = document.getElementById('sentinelAbilityXY');
+    //         const duelistAbilityXY = document.getElementById('duelistAbilityXY');
+    //         const flashAbilityXY = document.getElementById('flashAbilityXY');
+    //
+    //         const container = document.getElementById('container');
+    //         const containerRect = container.getBoundingClientRect();
+    //         const scalingFactor = container.offsetWidth / containerRect.width;
+    //
+    //         const mapImageRect = mapImage.getBoundingClientRect();
+    //         const smokesAgentXYRect = smokesAgentXY.getBoundingClientRect();
+    //         const initiatorAgentXYRect = initiatorAgentXY.getBoundingClientRect();
+    //         const sentinelAgentXYRect = sentinelAgentXY.getBoundingClientRect();
+    //         const duelistAgentXYRect = duelistAgentXY.getBoundingClientRect();
+    //         const flashAgentXYRect = flashAgentXY.getBoundingClientRect();
+    //         const smokeFirstXYRect = smokeFirstXY.getBoundingClientRect();
+    //         const smokeSecondXYRect = smokeSecondXY.getBoundingClientRect();
+    //         const initiatorAbilityXYRect = initiatorAbilityXY.getBoundingClientRect();
+    //         const sentinelAbilityXYRect = sentinelAbilityXY.getBoundingClientRect();
+    //         const duelistAbilityXYRect = duelistAbilityXY.getBoundingClientRect();
+    //         const flashAbilityXYRect = flashAbilityXY.getBoundingClientRect();
+    //
+    //         setMapImage({
+    //             x: mapImageRect.left * scalingFactor,
+    //             y: mapImageRect.top * scalingFactor,
+    //         });
+    //         setSmokesAgentXY({
+    //             x: (sentinelAgentXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (sentinelAgentXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setFlashAgentXY({
+    //             x: (duelistAgentXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (duelistAgentXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setInitiatorAgentXY({
+    //             x: (flashAgentXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (flashAgentXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setSentinelAgentXY({
+    //             x: (smokeFirstXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (smokeFirstXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setSmokeFirstXY({
+    //             x: (smokesAgentXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (smokesAgentXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setSmokeSecondXY({
+    //             x: (initiatorAgentXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (initiatorAgentXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setInitiatorAbilityXY({
+    //             x: (smokeSecondXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (smokeSecondXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setSentinelAbilityXY({
+    //             x: (initiatorAbilityXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (initiatorAbilityXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setFlashAbilityXY({
+    //             x: (sentinelAbilityXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (sentinelAbilityXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setDuelistAgentXY({
+    //             x: (duelistAbilityXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (duelistAbilityXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //         setDuelistAbilityXY({
+    //             x: (flashAbilityXYRect.left - mapImageRect.left) * scalingFactor,
+    //             y: (flashAbilityXYRect.top - mapImageRect.top) * scalingFactor,
+    //         });
+    //     }
+    //
+    //     handleResize();
+    //
+    //     window.addEventListener('resize', handleResize);
+    //
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize);
+    //     };
+    // }, []);
+
+    return (
+        <div id="container" className="image-container">
+            <img
+                id="mapImage"
+                src="/MiniMap Icons/Ascent.png"
+                alt="image1"
+                style={{ position: 'relative' }}
+            />
+            <img
+                id="smokesAgentXY"
+                src={agents.brim.image}
+                alt="image4"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + smokesAgentXY.y,
+                    left: mapImage.x + smokesAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="flashAgentXY"
+                src={agents.reyna.image}
+                alt="image5"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + flashAgentXY.y,
+                    left: mapImage.x + flashAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="initiatorAgentXY"
+                src={agents.sova.image}
+                alt="image6"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + initiatorAgentXY.y,
+                    left: mapImage.x + initiatorAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="sentinelAgentXY"
+                src={agents.killjoy.image}
+                alt="image7"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + sentinelAgentXY.y,
+                    left: mapImage.x + sentinelAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="duelistAgentXY"
+                src={agents.jett.image}
+                alt="image11"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + duelistAgentXY.y,
+                    left: mapImage.x + duelistAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="smokesFirstXY"
+                src={agents.brim.abilities[0].image}
+                alt="smokes"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + smokeFirstXY.y,
+                    left: mapImage.x + smokeFirstXY.x,
+                    zIndex: 1,
+                    width: '60px',
+                    height: '60px',
+                }}
+            />
+            <img
+                id="smokesSecondXY"
+                src={agents.brim.abilities[0].image}
+                alt="image3"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + smokeSecondXY.y,
+                    left: mapImage.x + smokeSecondXY.x,
+                    zIndex: 1,
+                    width: '60px',
+                    height: '60px',
+                }}
+            />
+            <img
+                id="initiatorAbilityXY"
+                src={agents.sova.abilities[0].image}
+                alt="image8"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + initiatorAbilityXY.y,
+                    left: mapImage.x + initiatorAbilityXY.x,
+                    zIndex: 1,
+                    width: '100px',
+                    height: '100px',
+                }}
+            />
+            <img
+                id="sentinelAbilityXY"
+                src={agents.killjoy.abilities[0].image}
+                alt="image9"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + sentinelAbilityXY.y,
+                    left: mapImage.x + sentinelAbilityXY.x,
+                    zIndex: 1,
+                    width: '60px',
+                    height: '60px',
+                }}
+            />
+            <img
+                id="flashAbilityXY"
+                src={agents.reyna.abilities[0].image}
+                alt="image10"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + flashAbilityXY.y,
+                    left: mapImage.x + flashAbilityXY.x,
+                    zIndex: 1,
+                    width: '50px',
+                    height: '50px',
+                }}
+            />
+            <img
+                id="duelistAbilityXY"
+                src={agents.jett.abilities[0].image}
+                alt="image12"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + duelistAbilityXY.y,
+                    left: mapImage.x + duelistAbilityXY.x,
+                    zIndex: 1,
+                    width: '60px',
+                    height: '60px',
+                }}
+            />
+        </div>
+    );
+}
+
+function CatSplit() {
+    const [mapImage, setMapImage] = useState({ x: 0, y: 0 }); // Minimap
+    const [smokesAgentXY, setSmokesAgentXY] = useState({ x: 480, y: 430 });
+    const [initiatorAgentXY, setInitiatorAgentXY] = useState({ x: 640, y: 470 });
+    const [sentinelAgentXY, setSentinelAgentXY] = useState({ x: 620, y: 480 });
+    const [duelistAgentXY, setDuelistAgentXY] = useState({ x: 25, y: 370 });
+    const [flashAgentXY, setFlashAgentXY] = useState({ x: 500, y: 400 });
+    const [smokeFirstXY, setSmokeFirstXY] = useState({ x:393, y: 340 });
+    const [smokeSecondXY, setSmokeSecondXY] = useState({ x: 593, y: 275 });
+    const [initiatorAbilityXY, setInitiatorAbilityXY] = useState({ x: 10, y: 250 });
+    const [sentinelAbilityXY, setSentinelAbilityXY] = useState({ x: 230, y: 350 });
+    const [duelistAbilityXY, setDuelistAbilityXY] = useState({ x: 5, y: 140 });
+    const [flashAbilityXY, setFlashAbilityXY] = useState({ x: 40, y: 180 });
+
+    // useEffect(() => {
+    //     function handleResize() {
+    //         const image1 = document.getElementById('image1');
+    //         const image2 = document.getElementById('image2');
+    //         const image3 = document.getElementById('image3');
+    //         const image4 = document.getElementById('image4');
+    //         const image5 = document.getElementById('image5');
+    //         const image6 = document.getElementById('image6');
+    //         const image7 = document.getElementById('image7');
+    //         const image8 = document.getElementById('image8');
+    //         const image9 = document.getElementById('image9');
+    //         const image10 = document.getElementById('image10');
+    //         const image11 = document.getElementById('image11');
+    //         const image12 = document.getElementById('image12');
+    //         const container = document.getElementById('container');
+    //         const containerRect = container.getBoundingClientRect();
+    //         const scalingFactor = container.offsetWidth / containerRect.width;
+    //         const image1Rect = image1.getBoundingClientRect();
+    //         const image2Rect = image2.getBoundingClientRect();
+    //         const image3Rect = image3.getBoundingClientRect();
+    //         const image4Rect = image4.getBoundingClientRect();
+    //         const image5Rect = image5.getBoundingClientRect();
+    //         const image6Rect = image6.getBoundingClientRect();
+    //         const image7Rect = image7.getBoundingClientRect();
+    //         const image8Rect = image8.getBoundingClientRect();
+    //         const image9Rect = image9.getBoundingClientRect();
+    //         const image10Rect = image10.getBoundingClientRect();
+    //         const image11Rect = image11.getBoundingClientRect();
+    //         const image12Rect = image12.getBoundingClientRect();
+    //         setImage1Position({
+    //             x: image1Rect.left * scalingFactor,
+    //             y: image1Rect.top * scalingFactor,
+    //         });
+    //         setImage2Position({
+    //             x: (image2Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image2Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage3Position({
+    //             x: (image3Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image3Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage4Position({
+    //             x: (image4Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image4Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage5Position({
+    //             x: (image5Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image5Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage6Position({
+    //             x: (image6Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image6Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage7Position({
+    //             x: (image7Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image7Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage8Position({
+    //             x: (image8Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image8Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage9Position({
+    //             x: (image9Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image9Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage10Position({
+    //             x: (image10Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image10Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage11Position({
+    //             x: (image11Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image11Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //         setImage12Position({
+    //             x: (image12Rect.left - image1Rect.left) * scalingFactor,
+    //             y: (image12Rect.top - image1Rect.top) * scalingFactor,
+    //         });
+    //     }
+    //
+    //     handleResize();
+    //
+    //     window.addEventListener('resize', handleResize);
+    //
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize);
+    //     };
+    // }, []);
+
+    return (
+        <div id="container" className="image-container">
+            <img
+                id="mapImage"
+                src="/MiniMap Icons/Ascent.png"
+                alt="image1"
+                style={{ position: 'relative' }}
+            />
+            <img
+                id="smokesAgentXY"
+                src={agents.brim.image}
+                alt="image4"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + smokesAgentXY.y,
+                    left: mapImage.x + smokesAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="flashAgentXY"
+                src={agents.reyna.image}
+                alt="image5"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + flashAgentXY.y,
+                    left: mapImage.x + flashAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="initiatorAgentXY"
+                src={agents.sova.image}
+                alt="image6"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + initiatorAgentXY.y,
+                    left: mapImage.x + initiatorAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="sentinelAgentXY"
+                src={agents.killjoy.image}
+                alt="image7"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + sentinelAgentXY.y,
+                    left: mapImage.x + sentinelAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="duelistAgentXY"
+                src={agents.jett.image}
+                alt="image11"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + duelistAgentXY.y,
+                    left: mapImage.x + duelistAgentXY.x,
+                    zIndex: 1,
+                    width: '40px',
+                    height: '40px',
+                }}
+            />
+            <img
+                id="smokesFirstXY"
+                src={agents.brim.abilities[0].image}
+                alt="smokes"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + smokeFirstXY.y,
+                    left: mapImage.x + smokeFirstXY.x,
+                    zIndex: 1,
+                    width: '60px',
+                    height: '60px',
+                }}
+            />
+            <img
+                id="smokesSecondXY"
+                src={agents.brim.abilities[0].image}
+                alt="image3"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + smokeSecondXY.y,
+                    left: mapImage.x + smokeSecondXY.x,
+                    zIndex: 1,
+                    width: '60px',
+                    height: '60px',
+                }}
+            />
+            <img
+                id="initiatorAbilityXY"
+                src={agents.sova.abilities[0].image}
+                alt="image8"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + initiatorAbilityXY.y,
+                    left: mapImage.x + initiatorAbilityXY.x,
+                    zIndex: 1,
+                    width: '100px',
+                    height: '100px',
+                }}
+            />
+            <img
+                id="sentinelAbilityXY"
+                src={agents.killjoy.abilities[0].image}
+                alt="image9"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + sentinelAbilityXY.y,
+                    left: mapImage.x + sentinelAbilityXY.x,
+                    zIndex: 1,
+                    width: '60px',
+                    height: '60px',
+                }}
+            />
+            <img
+                id="flashAbilityXY"
+                src={agents.reyna.abilities[0].image}
+                alt="image10"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + flashAbilityXY.y,
+                    left: mapImage.x + flashAbilityXY.x,
+                    zIndex: 1,
+                    width: '50px',
+                    height: '50px',
+                }}
+            />
+            <img
+                id="duelistAbilityXY"
+                src={agents.jett.abilities[0].image}
+                alt="image12"
+                style={{
+                    position: 'absolute',
+                    top: mapImage.y + duelistAbilityXY.y,
+                    left: mapImage.x + duelistAbilityXY.x,
+                    zIndex: 1,
+                    width: '60px',
+                    height: '60px',
+                }}
+            />
+        </div>
+    );
+}
 
 function AscentStrats() {
-    function MarketSplit() {
-        const [image1Position, setImage1Position] = useState({ x: 0, y: 0 });
-        const [image2Position, setImage2Position] = useState({ x:-140, y: 90 });
-        const [image3Position, setImage3Position] = useState({ x: 80, y: 320 });
-        const [image4Position, setImage4Position] = useState({ x: -100, y: 380 });
-
-        useEffect(() => {
-            function handleResize() {
-                const image1 = document.getElementById('image1');
-                const image2 = document.getElementById('image2');
-                const image3 = document.getElementById('image3');
-                const container = document.getElementById('container');
-                const containerRect = container.getBoundingClientRect();
-                const scalingFactor = container.offsetWidth / containerRect.width;
-                const image1Rect = image1.getBoundingClientRect();
-                const image2Rect = image2.getBoundingClientRect();
-                const image3Rect = image3.getBoundingClientRect();
-                setImage1Position({
-                    x: image1Rect.left * scalingFactor,
-                    y: image1Rect.top * scalingFactor,
-                });
-                setImage2Position({
-                    x: (image2Rect.left - image1Rect.left) * scalingFactor,
-                    y: (image2Rect.top - image1Rect.top) * scalingFactor,
-                });
-                setImage3Position({
-                    x: (image3Rect.left - image1Rect.left) * scalingFactor,
-                    y: (image3Rect.top - image1Rect.top) * scalingFactor,
-                });
-            }
-
-            handleResize();
-
-            window.addEventListener('resize', handleResize);
-
-            return () => {
-                window.removeEventListener('resize', handleResize);
-            };
-        }, []);
-
-        return (
-            <div id="container" className="image-container">
-                <img
-                    id="image1"
-                    src="/MiniMap Icons/Ascent.png"
-                    alt="image1"
-                    style={{ position: 'relative' }}
-                />
-                <img
-                    id="image2"
-                    src={agents.brim.abilities[0].image}
-                    alt="smokes"
-                    style={{
-                        position: 'absolute',
-                        top: image1Position.y + image2Position.y,
-                        left: image1Position.x + image2Position.x,
-                        zIndex: 1,
-                        width: '50px',
-                        height: '50px',
-                    }}
-                />
-                <img
-                    id="image3"
-                    src={agents.brim.abilities[0].image}
-                    alt="image3"
-                    style={{
-                        position: 'absolute',
-                        top: image1Position.y + image3Position.y,
-                        left: image1Position.x + image3Position.x,
-                        zIndex: 1,
-                        width: '50px',
-                        height: '50px',
-                    }}
-                />
-                <img
-                    id="image4"
-                    src={agents.brim.image}
-                    alt="image4"
-                    style={{
-                        position: 'absolute',
-                        top: image1Position.y + image4Position.y,
-                        left: image1Position.x + image4Position.x,
-                        zIndex: 1,
-                        width: '50px',
-                        height: '50px',
-                    }}
-                />
-            </div>
-        );
-    }
 
     const customPrevArrow = (onClickHandler, hasPrev, label) => {
         return (
             hasPrev && (
-                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', left: '5%', backgroundColor: 'transparent', borderRadius: '50%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(-50%,-50%)', padding: '10px' }}>
+                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', left: '5%', color:'white', backgroundColor: 'transparent', borderRadius: '50%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(-50%,-50%)', padding: '10px' }}>
                     <span style={{ fontSize: '2rem' }}>&lt;</span>
                     <span style={{ fontSize: '1rem', marginLeft: '5px' }}>Prev</span>
                 </button>
@@ -388,7 +854,7 @@ function AscentStrats() {
     const customNextArrow = (onClickHandler, hasNext, label) => {
         return (
             hasNext && (
-                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', right: '5%', backgroundColor: 'transparent', borderRadius: '25%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(50%,-50%)', padding: '10px' }}>
+                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', right: '5%', color:'white', backgroundColor: 'transparent', borderRadius: '25%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(50%,-50%)', padding: '10px' }}>
                     <span style={{ fontSize: '2rem' }}>&gt;</span>
                     <span style={{ fontSize: '1rem', marginLeft: '5px' }}>Next</span>
                 </button>
@@ -405,7 +871,7 @@ function AscentStrats() {
                 <MarketSplit />
             </div>
             <div>
-                <img src="/Strategies/Ascent/Strat1/Duelist/brim;raze;jett;sova;killjoy.png" alt="Slide 2" />
+                <CatSplit/>
             </div>
             <div>
                 <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
