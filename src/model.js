@@ -1,3 +1,6 @@
+import { PrismaClient } from "@prisma/client";
+
+
 //This function will eventually be changed to access the database to get the list of characters
 export const getCharacters = () => {
     let characters;
@@ -27,6 +30,12 @@ export const getCharacters = () => {
     return characters;
 }
 
+export const fetchCharacters = async () => {
+    const prisma = new PrismaClient();
+    const allCharacters = await prisma.Character.findMany();
+    console.log("database:\n" + allCharacters);
+    return allCharacters;
+}
 
 //This function will eventually be changed to access the database to get the list of characters
 export const getMaps = () => {
