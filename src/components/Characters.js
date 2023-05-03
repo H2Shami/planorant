@@ -15,16 +15,11 @@ class Character {
 //This function renders the list of character buttons
 //Toggles between on and off, allowing a maximum selection of 5
 const Characters = (props) => {
-
-    console.log(props.characters);
-    console.log("^finished printing props");
-
-    const urls = getCharacters();
+    const { characters } = props;
 
     const [buttonStates, setButtonStates] = useState(
-        urls?.map(() => ({ clicked: false }))
+        characters?.map(() => ({ clicked: false }))
     );
-
     const [clickedCount, setclickedCount] = useState(0);
 
     const handleClick = (index) => {
@@ -42,32 +37,45 @@ const Characters = (props) => {
 
     const selectedButtons = buttonStates?.reduce((acc, curr, index) => {
         if (curr.clicked) {
-            acc.push(urls[index]);
+            const character = characters[index];
+            if (character.duelist) {
+                acc.push(`${character.name} (Duelist)`);
+            } else if (character.controller) {
+                acc.push(`${character.name} (Controller)`);
+            } else if (character.initiator) {
+                acc.push(`${character.name} (Initiator)`);
+            } else if (character.sentinel) {
+                acc.push(`${character.name} (Sentinel)`);
+            } else {
+                acc.push(character.name);
+            }
         }
         return acc;
     }, []);
 
     return (
         <div>
-            {urls?.map((item, index) => (
+            {characters?.map((item, index) => (
                 <button
                     key={index}
                     style={{
-                        width: '5vw',
-                        height: '5vw',
-                        background: 'white',
-                        border: 'black',
-                        outline: 'solid black',
-                        cursor: 'pointer',
-                        margin: '0.5vw',
-                        boxShadow: buttonStates[index].clicked ? '0px 0px 10px 5px rgba(255,0,0,1)' : 'none',
+                        width: "5vw",
+                        height: "5vw",
+                        background: "white",
+                        border: "black",
+                        outline: "solid black",
+                        cursor: "pointer",
+                        margin: "0.5vw",
+                        boxShadow: buttonStates[index].clicked
+                            ? "0px 0px 10px 5px rgba(255,0,0,1)"
+                            : "none"
                     }}
                     onClick={() => handleClick(index)}
                 >
                     <img
-                        src={item}
+                        src={item.path}
                         alt="Button image"
-                        style={{ display: 'block', margin: 'auto', maxWidth: '100%', maxHeight: '100%' }}
+                        style={{ display: "block", margin: "auto", maxWidth: "100%", maxHeight: "100%" }}
                     />
                 </button>
             ))}
@@ -76,18 +84,7 @@ const Characters = (props) => {
             </div>
         </div>
     );
-}
-
-export async function getServerSideProps() {
-    const response = await fetch(`${process.env.BASE_URL}/api/hello.js`)
-    const data = await response.json();
-    console.log(data);
-    console.log("^serversideprops");
-    return {
-        props: {
-            characters: data
-        },
-    };
-}
+};
 
 export default Characters;
+
