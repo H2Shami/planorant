@@ -1,16 +1,17 @@
 import Head from 'next/head'
 import React, { useState, useEffect } from 'react';
-import Characters from "@/components/Characters";
+//import Characters from "@/components/Characters";
 import Maps from "@/components/Maps";
 import Strategies from "@/components/Strategies";
+import { getCharacters } from "@/model";
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
-  return (
+export default function Home({ characters }) {
+    return (
     <>
       <Head>
         <title>Planorant</title>
@@ -20,7 +21,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
           <container style={{display: 'grid', gridTemplateColumns: '18vw 45vw 30vw'}}>
-              <Characters/>
+              <Characters characters={characters}/>
               <Strategies/>
               <Maps/>
       </container>
@@ -29,3 +30,18 @@ export default function Home() {
   )
 }
 
+
+export async function getServerSideProps() {
+    const response = await fetch(`${process.env.BASE_URL}/api/hello.js`)
+    if (!response.ok) {
+        console.log("INVALID RESPONSE: \n" + response);
+    }
+    const data = await response.json();
+    console.log(data);
+    console.log("^serversideprops");
+    return {
+        props: {
+            characters: data
+        },
+    };
+}
