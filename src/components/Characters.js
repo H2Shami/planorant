@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getCharacters, fetchCharacters } from '@/model.js';
 
+// Defining a class for the characters
 class Character {
     constructor(name, duelist, controller, initiator, sentinel, path) {
         this.name = name;
@@ -12,16 +12,19 @@ class Character {
     }
 }
 
-//This function renders the list of character buttons
-//Toggles between on and off, allowing a maximum selection of 5
+// Function component that renders the list of character buttons
 const Characters = (props) => {
     const { characters } = props;
 
+    // State to keep track of button states (clicked or not)
     const [buttonStates, setButtonStates] = useState(
         characters?.map(() => ({ clicked: false }))
     );
+
+    // State to keep track of the number of clicked buttons
     const [clickedCount, setclickedCount] = useState(0);
 
+    // Function to handle button click events
     const handleClick = (index) => {
         const newButtonStates = [...buttonStates];
         const clicked = newButtonStates[index].clicked;
@@ -35,24 +38,25 @@ const Characters = (props) => {
         }
     };
 
+    // Array to hold names of selected characters
     const selectedButtons = buttonStates?.reduce((acc, curr, index) => {
         if (curr.clicked) {
             const character = characters[index];
+            acc.push(character.name);
             if (character.duelist) {
-                acc.push(`${character.name} (Duelist)`);
+                acc.push(` (Duelist)`);
             } else if (character.controller) {
-                acc.push(`${character.name} (Controller)`);
+                acc.push(` (Controller)`);
             } else if (character.initiator) {
-                acc.push(`${character.name} (Initiator)`);
+                acc.push(` (Initiator)`);
             } else if (character.sentinel) {
-                acc.push(`${character.name} (Sentinel)`);
-            } else {
-                acc.push(character.name);
+                acc.push(` (Sentinel)`);
             }
         }
         return acc;
     }, []);
 
+    // Render the component
     return (
         <div>
             {characters?.map((item, index) => (
@@ -86,5 +90,6 @@ const Characters = (props) => {
     );
 };
 
+// Exporting the Characters component as the default module
 export default Characters;
 
