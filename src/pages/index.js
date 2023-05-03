@@ -1,11 +1,12 @@
 import Head from 'next/head'
 import React, { useState, useEffect } from 'react';
-//import Characters from "@/components/Characters";
+import Characters from "@/components/Characters";
 import Maps from "@/components/Maps";
 import Strategies from "@/components/Strategies";
 import { getCharacters } from "@/model";
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import {PrismaClient} from "@prisma/client"
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -30,18 +31,18 @@ export default function Home({ characters }) {
   )
 }
 
-
+/** Calls the PostgreSQL database using prisma from the API folder
+ *
+ * @returns a json of all the characters
+ */
 export async function getServerSideProps() {
-    const response = await fetch(`${process.env.BASE_URL}/api/hello.js`)
-    if (!response.ok) {
-        console.log("INVALID RESPONSE: \n" + response);
-    }
-    const data = await response.json();
-    console.log(data);
+    const prisma = new PrismaClient();
+    const response = await prisma.Character.findMany();
+    console.log(response);
     console.log("^serversideprops");
     return {
         props: {
-            characters: data
+            characters: response
         },
     };
 }
