@@ -1,17 +1,15 @@
 import Head from 'next/head'
-import React, { useState, useEffect } from 'react';
 import Characters from "@/components/Characters";
 import Maps from "@/components/Maps";
 import Strategies from "@/components/Strategies";
-import { getCharacters } from "@/model";
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
-import {PrismaClient} from "@prisma/client"
+import { PrismaClient } from "@prisma/client"
 
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ characters }) {
+export default function Home({ characters, maps }) {
     return (
     <>
       <Head>
@@ -24,7 +22,7 @@ export default function Home({ characters }) {
           <container style={{display: 'grid', gridTemplateColumns: '18vw 45vw 30vw'}}>
               <Characters characters={characters}/>
               <Strategies/>
-              <Maps/>
+              <Maps maps={maps}/>
       </container>
           </main>
     </>
@@ -37,12 +35,17 @@ export default function Home({ characters }) {
  */
 export async function getServerSideProps() {
     const prisma = new PrismaClient();
-    const response = await prisma.Character.findMany();
-    console.log(response);
-    console.log("^serversideprops");
+
+    //Grab all characters
+    const characterResponse = await prisma.Character.findMany();
+
+    //Only grab maps in competitive rotation
+    const mapResponse = await prisma.Map.findMany({where: {inRotation: true}});
+
     return {
         props: {
-            characters: response
+            characters: characterResponse,
+            maps: mapResponse
         },
     };
 }

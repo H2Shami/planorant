@@ -1,16 +1,4 @@
-import React, { useState, useEffect } from 'react';
-
-// Defining a class for the characters
-class Character {
-    constructor(name, duelist, controller, initiator, sentinel, path) {
-        this.name = name;
-        this.duelist = duelist;
-        this.controller = controller;
-        this.initiator = initiator;
-        this.sentinel = sentinel;
-        this.path = path;
-    }
-}
+import React, { useState } from 'react';
 
 // Function component that renders the list of character buttons
 const Characters = (props) => {
@@ -42,15 +30,14 @@ const Characters = (props) => {
     const selectedButtons = buttonStates?.reduce((acc, curr, index) => {
         if (curr.clicked) {
             const character = characters[index];
-            acc.push(character.name);
             if (character.duelist) {
-                acc.push(` (Duelist)`);
+                acc.push(`(Duelist)`);
             } else if (character.controller) {
-                acc.push(` (Controller)`);
+                acc.push(`(Controller)`);
             } else if (character.initiator) {
-                acc.push(` (Initiator)`);
+                acc.push(`(Initiator)`);
             } else if (character.sentinel) {
-                acc.push(` (Sentinel)`);
+                acc.push(`(Sentinel)`);
             }
         }
         return acc;
