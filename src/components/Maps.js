@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { getMaps } from '@/model.js';
 
-const Maps = () => {
-
+const Maps = (props) => {
+    const { maps } = props;
     //Grab the characters
     const urls = getMaps();
 
     const [buttonStates, setButtonStates] = useState(
-        urls.map(() => ({ clicked: false }))
+        maps.map(() => ({ clicked: false }))
     );
 
     const [clickedCount, setclickedCount] = useState(0);
@@ -27,19 +27,19 @@ const Maps = () => {
 
     const selectedButtons = buttonStates.reduce((acc, curr, index) => {
         if (curr.clicked) {
-            acc.push(urls[index]);
+            acc.push(maps[index].name);
         }
         return acc;
     }, []);
 
     return (
         <div>
-            {urls.map((item, index) => (
+            {maps.map((item, index) => (
                 <button
                     key={index}
                     style={{
-                        width: '14vw',
-                        height: '8vw',
+                        width: '12.5vw',
+                        height: '7vw',
                         background: 'black',
                         border: 'black',
                         outline: 'solid black',
@@ -50,7 +50,7 @@ const Maps = () => {
                     onClick={() => handleClick(index)}
                 >
                     <img
-                        src={item}
+                        src={item.path}
                         alt="Button image"
                         style={{ display: 'block', margin: 'auto', maxWidth: '100%', maxHeight: '100%' }}
                     />

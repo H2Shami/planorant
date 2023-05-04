@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { getCharacters } from '@/model.js';
+import React, { useState } from 'react';
 
-//This function renders the list of character buttons
-//Toggles between on and off, allowing a maximum selection of 5
-const Characters = () => {
+// Function component that renders the list of character buttons
+const Characters = (props) => {
+    const { characters } = props;
 
-
-    //Grab the characters
-    const urls = getCharacters();
-
+    // State to keep track of button states (clicked or not)
     const [buttonStates, setButtonStates] = useState(
-        urls.map(() => ({ clicked: false }))
+        characters?.map(() => ({ clicked: false }))
     );
 
+    // State to keep track of the number of clicked buttons
     const [clickedCount, setclickedCount] = useState(0);
 
+    // Function to handle button click events
     const handleClick = (index) => {
         const newButtonStates = [...buttonStates];
         const clicked = newButtonStates[index].clicked;
@@ -28,42 +26,57 @@ const Characters = () => {
         }
     };
 
-    const selectedButtons = buttonStates.reduce((acc, curr, index) => {
+    // Array to hold names of selected characters
+    const selectedButtons = buttonStates?.reduce((acc, curr, index) => {
         if (curr.clicked) {
-            acc.push(urls[index]);
+            const character = characters[index];
+            if (character.duelist) {
+                acc.push(`(Duelist)`);
+            } else if (character.controller) {
+                acc.push(`(Controller)`);
+            } else if (character.initiator) {
+                acc.push(`(Initiator)`);
+            } else if (character.sentinel) {
+                acc.push(`(Sentinel)`);
+            }
         }
         return acc;
     }, []);
 
+    // Render the component
     return (
-        <div>
-            {urls.map((item, index) => (
+            <div>
+            {characters?.map((item, index) => (
                 <button
                     key={index}
                     style={{
-                        width: '5vw',
-                        height: '5vw',
-                        background: 'white',
-                        border: 'black',
-                        outline: 'solid black',
-                        cursor: 'pointer',
-                        margin: '0.5vw',
-                        boxShadow: buttonStates[index].clicked ? '0px 0px 10px 5px rgba(255,0,0,1)' : 'none',
+                        width: "5vw",
+                        height: "5vw",
+                        background: "white",
+                        border: "black",
+                        outline: "solid black",
+                        cursor: "pointer",
+                        margin: "0.5vw",
+                        boxShadow: buttonStates[index].clicked
+                            ? "0px 0px 10px 5px rgba(255,0,0,1)"
+                            : "none"
                     }}
                     onClick={() => handleClick(index)}
                 >
                     <img
-                        src={item}
+                        src={item.path}
                         alt="Button image"
-                        style={{ display: 'block', margin: 'auto', maxWidth: '100%', maxHeight: '100%' }}
+                        style={{ display: "block", margin: "auto", maxWidth: "100%", maxHeight: "100%" }}
                     />
                 </button>
             ))}
             <div>
-                Selected Characters: {selectedButtons.join(", ")}
+                Selected Characters: {selectedButtons?.join(", ")}
             </div>
-        </div>
+            </div>
     );
-}
+};
 
+// Exporting the Characters component as the default module
 export default Characters;
+
