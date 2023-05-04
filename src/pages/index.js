@@ -19,7 +19,7 @@ export default function Home() {
         <link rel="icon" href="/Planorant_Logo.ico" />
       </Head>
       <main className={styles.main}>
-          <container style={{display: 'grid', gridTemplateColumns: '18vw 45vw 30vw'}}>
+          <container style={{display: 'grid', gridTemplateColumns: '18vw 40vw 15vw'}}>
               <Characters/>
               <Strategies/>
               <Maps/>
