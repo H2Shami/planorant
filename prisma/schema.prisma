@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Character {
-    name    String  @unique
+    name    String @id @unique
     duelist Boolean @default(false)
     controller  Boolean @default(false)
     initiator   Boolean @default(false)
@@ -20,7 +20,7 @@ model Character {
 }
 
 model Map {
-    name    String  @unique
+    name    String  @id @unique
     inRotation  Boolean @default(false)
     path    String @unique
 }
