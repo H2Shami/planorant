@@ -60,15 +60,7 @@ const Characters = (props) => {
     const selectedButtons = buttonStates?.reduce((acc, curr, index) => {
         if (curr.clicked) {
             const character = characters[index];
-            if (character.duelist) {
-                acc.push(`(Duelist)`);
-            } else if (character.controller) {
-                acc.push(`(Controller)`);
-            } else if (character.initiator) {
-                acc.push(`(Initiator)`);
-            } else if (character.sentinel) {
-                acc.push(`(Sentinel)`);
-            }
+            acc.push(character.name);
         }
         return acc;
     }, []);
