@@ -23,6 +23,36 @@ const Characters = (props) => {
             };
             setclickedCount(clicked ? clickedCount - 1 : clickedCount + 1);
             setButtonStates(newButtonStates);
+
+            // Check if any role has been selected more than twice
+            const rolesCount = {
+                duelist: 0,
+                controller: 0,
+                initiator: 0,
+                sentinel: 0
+            };
+            newButtonStates.forEach((buttonState, index) => {
+                if (buttonState.clicked) {
+                    const character = characters[index];
+                    if (character.duelist) {
+                        rolesCount.duelist++;
+                    } else if (character.controller) {
+                        rolesCount.controller++;
+                    } else if (character.initiator) {
+                        rolesCount.initiator++;
+                    } else if (character.sentinel) {
+                        rolesCount.sentinel++;
+                    }
+                }
+            });
+
+
+            for (const role in rolesCount) {
+                if (rolesCount[role] > 2) {
+                    alert(`Poor team composition: Recommended two characters per role`);
+                    break;
+                }
+            }
         }
     };
 
