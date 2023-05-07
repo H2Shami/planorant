@@ -67,6 +67,7 @@ const Characters = (props) => {
 
     // Render the component
     return (
+        <>
             <div>
             {characters?.map((item, index) => (
                 <button
@@ -94,9 +95,10 @@ const Characters = (props) => {
             ))}
             <div>
                 Selected Characters: {selectedButtons?.join(", ")}
-                <Strategies clickedCount={clickedCount} />
             </div>
             </div>
+            <Strategies clickedCount={clickedCount} />
+        </>
     );
 };
 
