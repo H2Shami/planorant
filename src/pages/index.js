@@ -21,7 +21,6 @@ export default function Home({ characters, maps }) {
       <main className={styles.main}>
           <container style={{display: 'grid', gridTemplateColumns: '18vw 40vw 15vw'}}>
               <Characters characters={characters}/>
-              <Strategies/>
               <Maps maps={maps}/>
       </container>
           </main>
