@@ -4,7 +4,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
 
-const Strategies = () => {
+const Strategies = ({clickedCount}) => {
     const customPrevArrow = (onClickHandler, hasPrev, label) => {
         return (
             hasPrev && (
@@ -28,6 +28,8 @@ const Strategies = () => {
     };
 
     return (
+        <>
+            {clickedCount === 5 &&(
         <Carousel
             renderArrowPrev={customPrevArrow}
             renderArrowNext={customNextArrow}
@@ -43,6 +45,8 @@ const Strategies = () => {
                 <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
             </div>
         </Carousel>
+            )}
+        </>
     );
 }
 

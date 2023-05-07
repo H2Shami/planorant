@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import Strategies from './Strategies';
 // Function component that renders the list of character buttons
 const Characters = (props) => {
     const { characters } = props;
@@ -94,6 +94,7 @@ const Characters = (props) => {
             ))}
             <div>
                 Selected Characters: {selectedButtons?.join(", ")}
+                <Strategies clickedCount={clickedCount} />
             </div>
             </div>
     );
