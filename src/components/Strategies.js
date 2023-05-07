@@ -1,16 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-
+import {getIcons} from '@/model.js';
 
 
 const Strategies = ({clickedCount}) => {
+
+    const icons = getIcons();
     const customPrevArrow = (onClickHandler, hasPrev, label) => {
         return (
             hasPrev && (
                 <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', left: '5%', backgroundColor: 'transparent', borderRadius: '50%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(-50%,-50%)', padding: '10px' }}>
-                    <span style={{ fontSize: '2rem', backgroundColor: 'white' }}>&lt;</span>
-                    <span style={{ fontSize: '1rem', marginLeft: '5px', backgroundColor: 'white' }}>Prev</span>
+                   <span
+                       style={{
+                           fontSize: '2rem',
+                           backgroundColor: 'none',
+                           width: '50px', // Set the width to adjust the size of the icon
+                           height: '50px', // Set the height to adjust the size of the icon
+                           display: 'flex',
+                           alignItems: 'center',
+                           justifyContent: 'center',
+                       }}
+                   >
+          <img src={getIcons()[0]} alt="Previous Icon" />
+        </span>
+                    <span
+                        style={{
+                            fontSize: '1rem',
+                            marginLeft: '5px',
+                            backgroundColor: 'none',
+                        }}
+                    >
+
+        </span>
                 </button>
             )
         );
@@ -20,8 +42,28 @@ const Strategies = ({clickedCount}) => {
         return (
             hasNext && (
                 <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', right: '5%', backgroundColor: 'transparent', borderRadius: '25%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(50%,-50%)', padding: '10px' }}>
-                    <span style={{ fontSize: '2rem', backgroundColor: 'white' }}>&gt;</span>
-                    <span style={{ fontSize: '1rem', marginLeft: '5px', backgroundColor: 'white' }}>Next</span>
+                    <span
+                        style={{
+                            fontSize: '2rem',
+                            backgroundColor: 'none',
+                            width: '50px', // Set the width to adjust the size of the icon
+                            height: '50px', // Set the height to adjust the size of the icon
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
+          <img src={getIcons()[1]} alt="Next Icon" />
+        </span>
+                    <span
+                        style={{
+                            fontSize: '1rem',
+                            marginLeft: '5px',
+                            backgroundColor: 'none',
+                        }}
+                    >
+
+        </span>
                 </button>
             )
         );

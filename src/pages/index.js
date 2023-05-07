@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Characters from "@/components/Characters";
 import Maps from "@/components/Maps";
-import Strategies from "@/components/Strategies";
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { PrismaClient } from "@prisma/client"

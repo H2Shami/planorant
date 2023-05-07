@@ -14,6 +14,16 @@ export const getMaps = () => {
     return maps;
 }
 
+export const getIcons = () =>{
+    let icons;
+
+    icons = [
+        "/Map Icons/valoleft.svg",
+        "/Map Icons/valoright.svg",
+    ];
+    return icons;
+}
+
 // // pages/api/users.js
 // import pool from './db';
 //
