@@ -27,24 +27,31 @@ const Strategies = ({clickedCount}) => {
         );
     };
 
+
     return (
         <>
-            {clickedCount === 5 &&(
-        <Carousel
-            renderArrowPrev={customPrevArrow}
-            renderArrowNext={customNextArrow}
-            showThumbs={true}
-        >
-            <div>
-                <img src="/Map Icons/Haven.webp" alt="Slide 1" />
-            </div>
-            <div>
-                <img src="/Map Icons/Icebox.webp" alt="Slide 2" />
-            </div>
-            <div>
-                <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
-            </div>
-        </Carousel>
+            {clickedCount === 5 ? (
+                <Carousel
+                    renderArrowPrev={customPrevArrow}
+                    renderArrowNext={customNextArrow}
+                    showThumbs={true}
+                >
+                <Carousel renderArrowPrev={customPrevArrow} renderArrowNext={customNextArrow} showThumbs={true}>
+                    <div>
+                        <img src="/Map Icons/Haven.webp" alt="Slide 1" />
+                    </div>
+                    <div>
+                        <img src="/Map Icons/Icebox.webp" alt="Slide 2" />
+                    </div>
+                    <div>
+                        <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
+                    </div>
+                </Carousel>
+                </Carousel>
+            ) : (
+                    <div>
+                        <img src="/Planorant_Logo.png" alt="Slide 1" />
+                    </div>
             )}
         </>
     );
