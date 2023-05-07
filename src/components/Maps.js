@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import { getMaps } from '@/model.js';
 
-const Maps = (props) => {
-    const { maps } = props;
-    //Grab the characters
-    const urls = getMaps();
+const Maps = ({maps, onChange}) => {
 
     const [buttonStates, setButtonStates] = useState(
         maps.map(() => ({ clicked: false }))
@@ -22,6 +18,7 @@ const Maps = (props) => {
             };
             setclickedCount(clicked ? clickedCount - 1 : clickedCount + 1);
             setButtonStates(newButtonStates);
+            onChange(clicked ? '' : maps[index].name);
         }
     };
 
