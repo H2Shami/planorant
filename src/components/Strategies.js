@@ -4,7 +4,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import {getIcons} from '@/model.js';
 
 
-const Strategies = ({clickedCount}) => {
+const Strategies = ({selectedCharacters, selectedMap}) => {
 
     const icons = getIcons();
     const customPrevArrow = (onClickHandler, hasPrev, label) => {
@@ -69,10 +69,33 @@ const Strategies = ({clickedCount}) => {
         );
     };
 
+    const rolesCount = {
+        duelist: 0,
+        controller: 0,
+        initiator: 0,
+        sentinel: 0
+    };
+    let selectedCharactersString = '';
+    for (let character in selectedCharacters) {
+        selectedCharactersString += `${selectedCharacters[character].name} `;
+        if (selectedCharacters[character].duelist) rolesCount.duelist++;
+        if (selectedCharacters[character].controller) rolesCount.controller++;
+        if (selectedCharacters[character].initiator) rolesCount.initiator++;
+        if (selectedCharacters[character].sentinel) rolesCount.sentinel++;
+    }
+    for (const role in rolesCount) {
+        if (rolesCount[role] > 2) {
+            alert(`Poor team composition: Recommended two characters per role`);
+            break;
+        }
+    }
+
+    //Grab the amount of selected characters from the json
+    let totalCharacters = Object.keys(selectedCharacters).length;
 
     return (
         <>
-            {clickedCount === 5 ? (
+            {totalCharacters === 5 ? (
                 <Carousel
                     renderArrowPrev={customPrevArrow}
                     renderArrowNext={customNextArrow}
@@ -93,6 +116,8 @@ const Strategies = ({clickedCount}) => {
             ) : (
                     <div>
                         <img src="/Planorant_Logo.png" alt="Slide 1" />
+                        <p>Characters: {selectedCharactersString}</p>
+                        <p>Map: {selectedMap}</p>
                     </div>
             )}
         </>
