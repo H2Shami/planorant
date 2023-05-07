@@ -1,14 +1,29 @@
 import Head from 'next/head'
 import Characters from "@/components/Characters";
 import Maps from "@/components/Maps";
+import Strategies from "@/components/Strategies";
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { PrismaClient } from "@prisma/client"
+import {useState} from "react";
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ characters, maps }) {
+    const [characterSelection, setCharacterSelection] = useState('');
+    const [mapSelection, setMapSelection] = useState('');
+
+    // Callback function to update the selected values
+    const handleCharacters = (value) => {
+        setCharacterSelection(value);
+    };
+
+    const handleMaps = (value) => {
+        setMapSelection(value);
+    };
+
+
     return (
     <>
       <Head>
@@ -19,10 +34,11 @@ export default function Home({ characters, maps }) {
       </Head>
       <main className={styles.main}>
           <container style={{display: 'grid', gridTemplateColumns: '18vw 40vw 15vw'}}>
-              <Characters characters={characters}/>
-              <Maps maps={maps}/>
-      </container>
-          </main>
+              <Characters characters={characters} onChange={handleCharacters}/>
+              <Strategies selectedCharacters={characterSelection} selectedMap={mapSelection}/>
+              <Maps maps={maps} onChange={handleMaps}/>
+          </container>
+      </main>
     </>
   )
 }
