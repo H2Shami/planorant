@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import Strategies from './Strategies';
+
 // Function component that renders the list of character buttons
-const Characters = (props) => {
-    const { characters } = props;
+const Characters = ({ characters, onChange }) => {
 
     // State to keep track of button states (clicked or not)
     const [buttonStates, setButtonStates] = useState(
@@ -10,7 +9,7 @@ const Characters = (props) => {
     );
 
     // State to keep track of the number of clicked buttons
-    const [clickedCount, setclickedCount] = useState(0);
+    const [clickedCount, setClickedCount] = useState(0);
 
     // Function to handle button click events
     const handleClick = (index) => {
@@ -21,38 +20,16 @@ const Characters = (props) => {
                 ...newButtonStates[index],
                 clicked: !clicked
             };
-            setclickedCount(clicked ? clickedCount - 1 : clickedCount + 1);
+            setClickedCount(clicked ? clickedCount - 1 : clickedCount + 1);
             setButtonStates(newButtonStates);
-
-            // Check if any role has been selected more than twice
-            const rolesCount = {
-                duelist: 0,
-                controller: 0,
-                initiator: 0,
-                sentinel: 0
-            };
+            let selectedCharacters = [];
             newButtonStates.forEach((buttonState, index) => {
                 if (buttonState.clicked) {
                     const character = characters[index];
-                    if (character.duelist) {
-                        rolesCount.duelist++;
-                    } else if (character.controller) {
-                        rolesCount.controller++;
-                    } else if (character.initiator) {
-                        rolesCount.initiator++;
-                    } else if (character.sentinel) {
-                        rolesCount.sentinel++;
-                    }
+                    selectedCharacters.push(character);
                 }
             });
-
-
-            for (const role in rolesCount) {
-                if (rolesCount[role] > 2) {
-                    alert(`Poor team composition: Recommended two characters per role`);
-                    break;
-                }
-            }
+            onChange(selectedCharacters);
         }
     };
 
@@ -97,7 +74,6 @@ const Characters = (props) => {
                 Selected Characters: {selectedButtons?.join(", ")}
             </div>
             </div>
-            <Strategies clickedCount={clickedCount} />
         </>
     );
 };
