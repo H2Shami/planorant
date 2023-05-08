@@ -2,16 +2,34 @@ import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import {getIcons} from '@/model.js';
+import {getMapImages} from '@/model.js';
 
 
 
 const Strategies = ({selectedCharacters, selectedMap}) => {
 
     const icons = getIcons();
+
     const customPrevArrow = (onClickHandler, hasPrev, label) => {
         return (
             hasPrev && (
-                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', left: '5%', backgroundColor: 'transparent', borderRadius: '50%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(-50%,-50%)', padding: '10px' }}>
+                <button type="button"
+                        onClick={onClickHandler}
+                        title={label}
+                        style={{
+                            position: 'absolute',
+                            zIndex: 2,
+                            top: '50%',
+                            left: '5%',
+                            backgroundColor: 'transparent',
+                            borderRadius: '50%',
+                            border: 'none',
+                            outline: 'none',
+                            cursor: 'pointer',
+                            transform: 'translate(-50%,-50%)',
+                            padding: '10px'
+                        }}
+                >
                    <span
                        style={{
                            fontSize: '2rem',
@@ -42,7 +60,23 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
     const customNextArrow = (onClickHandler, hasNext, label) => {
         return (
             hasNext && (
-                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', right: '5%', backgroundColor: 'transparent', borderRadius: '25%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(50%,-50%)', padding: '10px' }}>
+                <button type="button"
+                        onClick={onClickHandler}
+                        title={label}
+                        style={{
+                            position: 'absolute',
+                            zIndex: 2,
+                            top: '50%',
+                            right: '5%',
+                            backgroundColor: 'transparent',
+                            borderRadius: '25%',
+                            border: 'none',
+                            outline: 'none',
+                            cursor: 'pointer',
+                            transform: 'translate(50%,-50%)',
+                            padding: '10px'
+                        }}
+                >
                     <span
                         style={{
                             fontSize: '2rem',
@@ -100,28 +134,23 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
 
     //Grab the amount of selected characters from the json
     let totalCharacters = Object.keys(selectedCharacters).length;
-
+    const mapImages = getMapImages(selectedMap);
     return (
         <>
-            {totalCharacters === 5 && selectedMap.length > 0? (
-                <Carousel
-                    renderArrowPrev={customPrevArrow}
-                    renderArrowNext={customNextArrow}
-                    showThumbs={true}
-                >
-                <Carousel renderArrowPrev={customPrevArrow} renderArrowNext={customNextArrow} showThumbs={true}>
-                    <div>
-                        <img src="/Map Icons/Haven.webp" alt="Slide 1" />
-                    </div>
-                    <div>
-                        <img src="/Map Icons/Icebox.webp" alt="Slide 2" />
-                    </div>
-                    <div>
-                        <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
-                    </div>
 
+            {totalCharacters === 5 && selectedMap.length > 0? (
+
+                <Carousel renderArrowPrev={customPrevArrow}
+                          renderArrowNext={customNextArrow}
+                          showThumbs={true}>
+
+                        {mapImages.map((image,index) =>(
+                        <div key={index}>
+                            <img src={image} alt={'Slide ${index + 1}'} />
+                        </div>
+                         ))}
                 </Carousel>
-                </Carousel>
+
             ) : (
                 <div style={{
                     border: '1px solid black',
@@ -157,7 +186,7 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                 </div>
             )}
         </>
-    );
+    )
 }
 
 export default Strategies;
