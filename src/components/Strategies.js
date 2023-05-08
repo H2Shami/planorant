@@ -141,15 +141,10 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                     zIndex: 1}}>
                     <p>
                         {totalCharacters < 5 ?
-                        "Select " + (5 - totalCharacters) + " more characters to proceed" :
-                        "Character selection complete"}
+                            `Select ${5 - totalCharacters} more character${5 - totalCharacters !== 1 ? 's' : ''} to proceed` :
+                            'Character selection complete'}
                     </p>
 
-                    {/*} <p>
-                    {totalCharacters < 5 && (
-                        <p>Select {5 - totalCharacters} more character{totalCharacters < 4 ? 's' : ''} to proceed</p>
-                    )}
-                    */}
                     <p>
                         {selectedMap.length === 0 ?
                             'Please select a map':
