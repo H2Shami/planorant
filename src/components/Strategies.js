@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import {getIcons} from '@/model.js';
+import {getMapImages} from '@/model.js';
 
 
 const Strategies = ({selectedCharacters, selectedMap}) => {
 
     const icons = getIcons();
+
     const customPrevArrow = (onClickHandler, hasPrev, label) => {
         return (
             hasPrev && (
@@ -92,53 +94,25 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
 
     //Grab the amount of selected characters from the json
     let totalCharacters = Object.keys(selectedCharacters).length;
-    let map = selectedMap;
-
+    const mapImages = getMapImages(selectedMap);
     return (
         <>
             {totalCharacters === 5 ? (
-                map == "Ascent" ?(
-                    <Carousel
-                        renderArrowPrev={customPrevArrow}
-                        renderArrowNext={customNextArrow}
-                        showThumbs={true}
-                    >
-                    <Carousel renderArrowPrev={customPrevArrow} renderArrowNext={customNextArrow} showThumbs={true}>
-                        <div>
-                            <img src="/Strategies/Ascent_A_Split.png" alt="Slide 1" />
-                        </div>
-                        <div>
-                            <img src="/Strategies/Ascent_A_Split_2.png" alt="Slide 2" />
-                        </div>
-                        <div>
-                            <img src="/Strategies/Ascent_B_Split.png" alt="Slide 3" />
-                        </div>
-                    </Carousel>
-                    </Carousel>
-                ):map == "Pearl"?(
-                    <Carousel
-                        renderArrowPrev={customPrevArrow}
-                        renderArrowNext={customNextArrow}
-                        showThumbs={true}
-                    >
-                    <Carousel renderArrowPrev={customPrevArrow} renderArrowNext={customNextArrow} showThumbs={true}>
-                        <div>
-                            <img src="/Strategies/Pearl_A_Split.png" alt="Slide 1" />
-                        </div>
-                        <div>
-                            <img src="/Strategies/Pearl_Mid_Split.png" alt="Slide 2" />
-                        </div>
-                        <div>
-                            <img src="/Strategies/Ascent_B_Split.png" alt="Slide 3" />
-                        </div>
-                    </Carousel>
-                    </Carousel>
-                ):
+                selectedMap == ""?(
                     <div>
-                    <img src="/Planorant_Logo.png" alt="Slide 1" />
-                    <p>Characters: {selectedCharactersString}</p>
-                    <p>Map: {selectedMap}</p>
-                    </div>
+                        <img src="/Planorant_Logo.png" alt="Slide 1" />
+                        <p>Characters: {selectedCharactersString}</p>
+                        <p>Map: {selectedMap}</p>
+                    </div>                    
+                ):(
+                <Carousel renderArrowPrev={customPrevArrow} renderArrowNext={customNextArrow} showThumbs={true}>
+                    {mapImages.map((image,index) =>(
+                        <div key={index}>
+                            <img src={image} alt={'Slide ${index + 1}'} />
+                        </div>
+                    ))}
+                </Carousel>
+                )                           
             ) : (
                     <div>
                         <img src="/Planorant_Logo.png" alt="Slide 1" />
