@@ -137,56 +137,55 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
     const mapImages = getMapImages(selectedMap);
     return (
         <>
-
-            {totalCharacters === 5 && selectedMap.length > 0? (
-
-                <Carousel renderArrowPrev={customPrevArrow}
-                          renderArrowNext={customNextArrow}
-                          showThumbs={true}>
-
-                        {mapImages.map((image,index) =>(
+            {totalCharacters === 5 && selectedMap.length > 0 ? (
+                <Carousel
+                    renderArrowPrev={customPrevArrow}
+                    renderArrowNext={customNextArrow}
+                    showThumbs={true}
+                >
+                    {mapImages.map((image, index) => (
                         <div key={index}>
-                            <img src={image} alt={'Slide ${index + 1}'} />
+                            <img src={image} alt={`Slide ${index + 1}`} />
                         </div>
-                         ))}
+                    ))}
                 </Carousel>
-
             ) : (
-                <div style={{
-                    border: '1px solid black',
-                    padding: '5px',
-                    boxShadow: ' 5px 5px 10px 1px #000',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    height: '50%',
-                    background: 'linear-gradient(\n' +
-                        '      to bottom,\n' +
-                        '      rgb(var(--background-start-rgb)),\n' +
-                        '      rgb(var(--background-end-rgb))\n' +
-                        '    )\n' +
-                        '    rgb(var(--background-start-rgb))',
-                    zIndex: 1}}>
-                    <p>
-                        {totalCharacters < 5 ?
-                            `Select ${5 - totalCharacters} more character${5 - totalCharacters !== 1 ? 's' : ''} to proceed` :
-                            'Character selection complete'}
-                    </p>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
 
-                    <p>
-                        {selectedMap.length === 0 ?
-                            'Please select a map':
-                            'You have selected: ' + selectedMap }
-                    </p>
-                    {showWarning &&
-                        <p style={{color: 'red'}}>
-                        Poor team composition: Recommended two characters per role
-                        </p>}
+                    <div>
+                        <img src={'/Planorant_Logo.png'} alt = "" style={{maxWidth:'100%', maxHeight:'100%'}}/>
+                    </div>
+                    <div style={{
+                        border: '1px solid black',
+                        padding: '5px',
+                        boxShadow: '5px 5px 10px 1px #000',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '30%',
+                        background: 'linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb))',
+                        zIndex: 1
+                    }}>
+                        <p>
+                            {totalCharacters < 5
+                                ? `Select ${5 - totalCharacters} more character${5 - totalCharacters !== 1 ? 's' : ''} to proceed`
+                                : 'Character selection complete'}
+                        </p>
+                        <p>
+                            {selectedMap.length === 0
+                                ? 'Please select a map'
+                                : 'You have selected: ' + selectedMap}
+                        </p>
+                        {showWarning && (
+                            <p style={{ color: 'red',alignItems:'center',textAlign:'center' }}>Poor team composition: Recommended two characters per role</p>
+                        )}
+                    </div>
                 </div>
+
             )}
         </>
-    )
+    );
 }
 
 export default Strategies;
