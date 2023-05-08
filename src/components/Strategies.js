@@ -4,6 +4,7 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import {getIcons} from '@/model.js';
 
 
+
 const Strategies = ({selectedCharacters, selectedMap}) => {
 
     const icons = getIcons();
@@ -69,6 +70,8 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
         );
     };
 
+    const [showWarning, setShowWarning] = useState(false);
+
     const rolesCount = {
         duelist: 0,
         controller: 0,
@@ -83,12 +86,17 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
         if (selectedCharacters[character].initiator) rolesCount.initiator++;
         if (selectedCharacters[character].sentinel) rolesCount.sentinel++;
     }
-    for (const role in rolesCount) {
-        if (rolesCount[role] > 2) {
-            alert(`Poor team composition: Recommended two characters per role`);
-            break;
+
+    useEffect(() => {
+        let hasExceededRoleLimit = false;
+        for (const role in rolesCount) {
+            if (rolesCount[role] > 2) {
+                hasExceededRoleLimit = true;
+                break;
+            }
         }
-    }
+        setShowWarning(hasExceededRoleLimit);
+    }, [selectedCharacters]);
 
     //Grab the amount of selected characters from the json
     let totalCharacters = Object.keys(selectedCharacters).length;
@@ -111,14 +119,31 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                     <div>
                         <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
                     </div>
+
                 </Carousel>
                 </Carousel>
             ) : (
-                    <div>
-                        <img src="/Planorant_Logo.png" alt="Slide 1" />
-                        <p>Characters: {selectedCharactersString}</p>
-                        <p>Map: {selectedMap}</p>
-                    </div>
+                <div style={{
+                    border: '1px solid black',
+                    padding: '5px',
+                    boxShadow: ' 5px 5px 10px 1px #000',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '50%',
+                    background: 'linear-gradient(\n' +
+                        '      to bottom,\n' +
+                        '      rgb(var(--background-start-rgb)),\n' +
+                        '      rgb(var(--background-end-rgb))\n' +
+                        '    )\n' +
+                        '    rgb(var(--background-start-rgb))',
+                    zIndex: 1}}>
+                    <p>Characters Selected: {selectedCharactersString}</p>
+                    <p>Map: {selectedMap}</p>
+                    {showWarning && <p style={{color: 'red'}}>
+                        Poor team composition: Recommended two characters per role</p>}
+                </div>
             )}
         </>
     );
