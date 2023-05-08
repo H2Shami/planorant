@@ -12,7 +12,23 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
     const customPrevArrow = (onClickHandler, hasPrev, label) => {
         return (
             hasPrev && (
-                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', left: '5%', backgroundColor: 'transparent', borderRadius: '50%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(-50%,-50%)', padding: '10px' }}>
+                <button type="button"
+                        onClick={onClickHandler}
+                        title={label}
+                        style={{
+                            position: 'absolute',
+                            zIndex: 2,
+                            top: '50%',
+                            left: '5%',
+                            backgroundColor: 'transparent',
+                            borderRadius: '50%',
+                            border: 'none',
+                            outline: 'none',
+                            cursor: 'pointer',
+                            transform: 'translate(-50%,-50%)',
+                            padding: '10px'
+                        }}
+                >
                    <span
                        style={{
                            fontSize: '2rem',
@@ -43,7 +59,23 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
     const customNextArrow = (onClickHandler, hasNext, label) => {
         return (
             hasNext && (
-                <button type="button" onClick={onClickHandler} title={label} style={{ position: 'absolute', zIndex: 2, top: '50%', right: '5%', backgroundColor: 'transparent', borderRadius: '25%', border: 'none', outline: 'none', cursor: 'pointer', transform: 'translate(50%,-50%)', padding: '10px' }}>
+                <button type="button"
+                        onClick={onClickHandler}
+                        title={label}
+                        style={{
+                            position: 'absolute',
+                            zIndex: 2,
+                            top: '50%',
+                            right: '5%',
+                            backgroundColor: 'transparent',
+                            borderRadius: '25%',
+                            border: 'none',
+                            outline: 'none',
+                            cursor: 'pointer',
+                            transform: 'translate(50%,-50%)',
+                            padding: '10px'
+                        }}
+                >
                     <span
                         style={{
                             fontSize: '2rem',
