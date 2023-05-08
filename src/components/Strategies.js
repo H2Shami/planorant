@@ -139,8 +139,9 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                         '    )\n' +
                         '    rgb(var(--background-start-rgb))',
                     zIndex: 1}}>
-                    <p>Select {5 - totalCharacters} more characters to proceed</p>
-                    <p>
+                    {totalCharacters < 5 && (
+                        <p>Select {5 - totalCharacters} more character{totalCharacters < 4 ? 's' : ''} to proceed</p>
+                    )}                    <p>
                         {selectedMap.length === 0? 'Please select a map':'You have selected: ' + selectedMap }
                     </p>
                     {showWarning &&
