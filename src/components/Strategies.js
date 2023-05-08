@@ -92,27 +92,53 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
 
     //Grab the amount of selected characters from the json
     let totalCharacters = Object.keys(selectedCharacters).length;
+    let map = selectedMap;
 
     return (
         <>
             {totalCharacters === 5 ? (
-                <Carousel
-                    renderArrowPrev={customPrevArrow}
-                    renderArrowNext={customNextArrow}
-                    showThumbs={true}
-                >
-                <Carousel renderArrowPrev={customPrevArrow} renderArrowNext={customNextArrow} showThumbs={true}>
+                map == "Ascent" ?(
+                    <Carousel
+                        renderArrowPrev={customPrevArrow}
+                        renderArrowNext={customNextArrow}
+                        showThumbs={true}
+                    >
+                    <Carousel renderArrowPrev={customPrevArrow} renderArrowNext={customNextArrow} showThumbs={true}>
+                        <div>
+                            <img src="/Strategies/Ascent_A_Split.png" alt="Slide 1" />
+                        </div>
+                        <div>
+                            <img src="/Strategies/Ascent_A_Split_2.png" alt="Slide 2" />
+                        </div>
+                        <div>
+                            <img src="/Strategies/Ascent_B_Split.png" alt="Slide 3" />
+                        </div>
+                    </Carousel>
+                    </Carousel>
+                ):map == "Pearl"?(
+                    <Carousel
+                        renderArrowPrev={customPrevArrow}
+                        renderArrowNext={customNextArrow}
+                        showThumbs={true}
+                    >
+                    <Carousel renderArrowPrev={customPrevArrow} renderArrowNext={customNextArrow} showThumbs={true}>
+                        <div>
+                            <img src="/Strategies/Pearl_A_Split.png" alt="Slide 1" />
+                        </div>
+                        <div>
+                            <img src="/Strategies/Pearl_Mid_Split.png" alt="Slide 2" />
+                        </div>
+                        <div>
+                            <img src="/Strategies/Ascent_B_Split.png" alt="Slide 3" />
+                        </div>
+                    </Carousel>
+                    </Carousel>
+                ):
                     <div>
-                        <img src="/Map Icons/Haven.webp" alt="Slide 1" />
+                    <img src="/Planorant_Logo.png" alt="Slide 1" />
+                    <p>Characters: {selectedCharactersString}</p>
+                    <p>Map: {selectedMap}</p>
                     </div>
-                    <div>
-                        <img src="/Map Icons/Icebox.webp" alt="Slide 2" />
-                    </div>
-                    <div>
-                        <img src="/Map Icons/Lotus.webp" alt="Slide 3" />
-                    </div>
-                </Carousel>
-                </Carousel>
             ) : (
                     <div>
                         <img src="/Planorant_Logo.png" alt="Slide 1" />
