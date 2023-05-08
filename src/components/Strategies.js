@@ -103,7 +103,7 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
 
     return (
         <>
-            {totalCharacters === 5 ? (
+            {totalCharacters === 5 && selectedMap.length > 0? (
                 <Carousel
                     renderArrowPrev={customPrevArrow}
                     renderArrowNext={customNextArrow}
@@ -141,8 +141,10 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                     zIndex: 1}}>
                     <p>Characters Selected: {selectedCharactersString}</p>
                     <p>Map: {selectedMap}</p>
-                    {showWarning && <p style={{color: 'red'}}>
-                        Poor team composition: Recommended two characters per role</p>}
+                    {showWarning &&
+                        <p style={{color: 'red'}}>
+                        Poor team composition: Recommended two characters per role
+                        </p>}
                 </div>
             )}
         </>
