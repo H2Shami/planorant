@@ -104,15 +104,20 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
         );
     };
 
+    //State variable to keep track of warning boolean
     const [showWarning, setShowWarning] = useState(false);
 
+    //object to keep track of number of characters selected per role
     const rolesCount = {
         duelist: 0,
         controller: 0,
         initiator: 0,
         sentinel: 0
     };
+
     let selectedCharactersString = '';
+
+    //to store selectedCharacters's names in a string and incrementing rolesCount
     for (let character in selectedCharacters) {
         selectedCharactersString += `${selectedCharacters[character].name} `;
         if (selectedCharacters[character].duelist) rolesCount.duelist++;
@@ -121,6 +126,7 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
         if (selectedCharacters[character].sentinel) rolesCount.sentinel++;
     }
 
+    //sets hasExceededRoleLimit variable to true when rolesCount > 2
     useEffect(() => {
         let hasExceededRoleLimit = false;
         for (const role in rolesCount) {
@@ -134,6 +140,8 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
 
     //Grab the amount of selected characters from the json
     let totalCharacters = Object.keys(selectedCharacters).length;
+
+    //storing the images of selected maps in mapImages
     const mapImages = getMapImages(selectedMap);
     return (
         <>
@@ -167,16 +175,19 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                         background: 'linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb))',
                         zIndex: 1
                     }}>
+                        //output real time sentences to reflect characters left to be selected
                         <p>
                             {totalCharacters < 5
                                 ? `Select ${5 - totalCharacters} more character${5 - totalCharacters !== 1 ? 's' : ''} to proceed`
                                 : 'Character selection complete'}
                         </p>
+                        //Lets user know to select a map and displays selected map
                         <p>
                             {selectedMap.length === 0
                                 ? 'Please select a map'
                                 : 'You have selected: ' + selectedMap}
                         </p>
+                        //Shows warning message when user selects more than 2 characters per role
                         {showWarning && (
                             <p style={{ color: 'red',alignItems:'center',textAlign:'center' }}>Poor team composition: Recommended two characters per role</p>
                         )}
