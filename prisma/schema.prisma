@@ -24,3 +24,16 @@ model Map {
     inRotation  Boolean @default(false)
     path    String @unique
 }
+
+model Strategy {
+    name    String
+    duelist Boolean @default(false)
+    controller  Boolean @default(false)
+    initiator   Boolean @default(false)
+    sentinel    Boolean @default(false)
+    map     String
+    explanation String
+    path    String  @unique
+
+    @@id([name, duelist, controller, initiator, sentinel, map])
+}
