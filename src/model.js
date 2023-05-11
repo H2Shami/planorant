@@ -29,17 +29,27 @@ export const getMapImages = (mapName) => {
     switch (mapName) {
       case "Ascent":
         images = [
-          "/Strategies/Ascent_A_Split.png",
-          "/Strategies/Ascent_A_Split_2.png",
-          "/Strategies/Ascent_B_Split.png",
+          "/Strategies/DAscent1.png",
+          "/Strategies/DAscent2.png",
+          "/Strategies/IAscent1.png",
+          "/Strategies/IAscent2.png",
         ];
         break;
       case "Pearl":
         images = [
-          "/Strategies/Pearl_A_Split.png",
-          "/Strategies/Pearl_Mid_Split.png",
-          "/Strategies/Pearl_B_Split.png",
+          "/Strategies/DHaven1.png",
+          "/Strategies/DHaven2.png",
+          "/Strategies/IHaven1.png",
+          "/Strategies/IHaven2.png",
         ];
+        break;
+        case "Haven":
+          images = [
+            "/Strategies/DPearl1.png",
+            "/Strategies/DPearl2.png",
+            "/Strategies/IPearl1.png",
+            "/Strategies/IPearl2.png",
+          ];  
         break;
       default:
         break;
