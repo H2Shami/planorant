@@ -175,19 +175,16 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                         background: 'linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb))',
                         zIndex: 1
                     }}>
-                        //output real time sentences to reflect characters left to be selected
                         <p>
                             {totalCharacters < 5
                                 ? `Select ${5 - totalCharacters} more character${5 - totalCharacters !== 1 ? 's' : ''} to proceed`
                                 : 'Character selection complete'}
                         </p>
-                        //Lets user know to select a map and displays selected map
                         <p>
                             {selectedMap.length === 0
                                 ? 'Please select a map'
                                 : 'You have selected: ' + selectedMap}
                         </p>
-                        //Shows warning message when user selects more than 2 characters per role
                         {showWarning && (
                             <p style={{ color: 'red',alignItems:'center',textAlign:'center' }}>Poor team composition: Recommended two characters per role</p>
                         )}
