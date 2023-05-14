@@ -56,13 +56,13 @@ export async function getServerSideProps() {
     //Only grab maps in competitive rotation
     const mapResponse = await prisma.Map.findMany({where: {inRotation: true}});
 
-    //const strategyResponse = await prisma.Strategy.findmany();
+    const strategyResponse = await prisma.Strategy.findMany();
 
     return {
         props: {
             characters: characterResponse,
             maps: mapResponse,
-        //  strategies: strategyResponse,  
+            strats: strategyResponse
         },
     };
 }

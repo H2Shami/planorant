@@ -6,7 +6,7 @@ import {getMapImages} from '@/model.js';
 
 
 
-const Strategies = ({selectedCharacters, selectedMap}) => {
+const Strategies = ({selectedCharacters, selectedMap, strats}) => {
 
     const icons = getIcons();
 
@@ -134,7 +134,7 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
 
     //Grab the amount of selected characters from the json
     let totalCharacters = Object.keys(selectedCharacters).length;
-    const mapImages = getMapImages(selectedMap);
+
     return (
         <>
             {totalCharacters === 5 && selectedMap.length > 0 ? (
@@ -142,12 +142,23 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                     renderArrowPrev={customPrevArrow}
                     renderArrowNext={customNextArrow}
                     showThumbs={true}
-                >
-                    {mapImages.map((image, index) => (
+                >                    
+                {rolesCount.duelist === 2?
+                    strats
+                    .filter((strat) => strat.map === selectedMap && strat.duelist)
+                    .map((strat, index) => (
                         <div key={index}>
-                            <img src={image} alt={`Slide ${index + 1}`} />
+                        <img src={strat.path} alt={`Slide ${index + 1}`} />
                         </div>
-                    ))}
+                )):
+                    strats
+                    .filter((strat) => strat.map === selectedMap && strat.initiator)
+                    .map((strat, index) => (
+                        <div key={index}>
+                        <img src={strat.path} alt={`Slide ${index + 1}`} />
+                        </div>
+                ))                    
+                }                   
                 </Carousel>
             ) : (
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
