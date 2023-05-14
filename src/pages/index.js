@@ -33,12 +33,16 @@ export default function Home({ characters, maps }) {
         <link rel="icon" href="/Planorant_Logo.ico" />
       </Head>
       <main className={styles.main}>
-          <container style={{display: 'grid', gridTemplateColumns: '18vw 40vw 15vw'}}>
+          <div className = {styles.characters}>
               <Characters characters={characters} onChange={handleCharacters}/>
+          </div>
+           <div className = {styles.strategies}>
               <Strategies selectedCharacters={characterSelection} selectedMap={mapSelection}/>
+          </div>
+          <div className = {styles.maps}>
               <Maps maps={maps} onChange={handleMaps}/>
-          </container>
-      </main>
+          </div>
+     </main>
     </>
   )
 }
