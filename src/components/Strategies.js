@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import {getIcons} from '@/model.js';
-import {getMapImages} from '@/model.js';
 
 
 
-const Strategies = ({selectedCharacters, selectedMap, strats}) => {
+
+const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
 
     const icons = getIcons();
 
@@ -144,18 +144,18 @@ const Strategies = ({selectedCharacters, selectedMap, strats}) => {
                     showThumbs={true}
                 >                    
                 {rolesCount.duelist === 2?
-                    strats
-                    .filter((strat) => strat.map === selectedMap && strat.duelist)
-                    .map((strat, index) => (
+                    selectedStrat
+                    .filter((selectedStrat) => selectedStrat.map === selectedMap && selectedStrat.duelist)
+                    .map((selectedStrat, index) => (
                         <div key={index}>
-                        <img src={strat.path} alt={`Slide ${index + 1}`} />
+                        <img src={selectedStrat.path} alt={`Slide ${index + 1}`} />
                         </div>
                 )):
-                    strats
-                    .filter((strat) => strat.map === selectedMap && strat.initiator)
-                    .map((strat, index) => (
+                    selectedStrat
+                    .filter((selectedStrat) => selectedStrat.map === selectedMap && selectedStrat.initiator)
+                    .map((selectedStrat, index) => (
                         <div key={index}>
-                        <img src={strat.path} alt={`Slide ${index + 1}`} />
+                        <img src={selectedStrat.path} alt={`Slide ${index + 1}`} />
                         </div>
                 ))                    
                 }                   
