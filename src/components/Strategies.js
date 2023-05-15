@@ -134,6 +134,29 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
 
     //Grab the amount of selected characters from the json
     let totalCharacters = Object.keys(selectedCharacters).length;
+    
+    let charsInStrat = [];
+    function validStrat()
+    {
+        let temp = []
+        for (let strats in selectedStrat) {            
+            if(selectedMap === selectedStrat[strats].map)
+            {
+                temp.push(selectedStrat[strats].character1);
+                temp.push(selectedStrat[strats].character2);
+                temp.push(selectedStrat[strats].character3);
+                temp.push(selectedStrat[strats].character4);
+                temp.push(selectedStrat[strats].character5);
+            }
+        }
+        for (let character in selectedCharacters) {
+            if(temp.includes(character) === false){
+                return false;
+            }
+        }
+        charsInStrat.splice(0,temp.length, ...temp);
+        return true;
+    }
 
     return (
         <>
@@ -143,21 +166,16 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
                     renderArrowNext={customNextArrow}
                     showThumbs={true}
                 >                    
-                {rolesCount.duelist === 2?
+                {validStrat()?
                     selectedStrat
-                    .filter((selectedStrat) => selectedStrat.map === selectedMap && selectedStrat.duelist)
+                    .filter((selectedStrat) => selectedStrat.map === selectedMap && selectedStrat.character1 === charsInStrat[0] && selectedStrat.character2 === charsInStrat[1] && selectedStrat.character3 === charsInStrat[2] && selectedStrat.character4 === charsInStrat[3] && selectedStrat.character5 === charsInStrat[4])
                     .map((selectedStrat, index) => (
                         <div key={index}>
                         <img src={selectedStrat.path} alt={`Slide ${index + 1}`} />
                         </div>
-                )):
-                    selectedStrat
-                    .filter((selectedStrat) => selectedStrat.map === selectedMap && selectedStrat.initiator)
-                    .map((selectedStrat, index) => (
-                        <div key={index}>
-                        <img src={selectedStrat.path} alt={`Slide ${index + 1}`} />
-                        </div>
-                ))                    
+                )):(
+                    <p>In Development</p>
+                )                  
                 }                   
                 </Carousel>
             ) : (
