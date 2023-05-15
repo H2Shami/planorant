@@ -146,22 +146,33 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
     return (
         <>
             {totalCharacters === 5 && selectedMap.length > 0 ? (
-                <Carousel
-                    renderArrowPrev={customPrevArrow}
-                    renderArrowNext={customNextArrow}
-                    showThumbs={true}
-                >
-                    {mapImages.map((image, index) => (
-                        <div key={index}>
-                            <img src={image} alt={`Slide ${index + 1}`} />
-                        </div>
-                    ))}
-                </Carousel>
+                <div style={{ display: 'flex' }}>
+                    <div style={{ flex: '3', marginRight: '20px' }}>
+                        <Carousel
+                            renderArrowPrev={customPrevArrow}
+                            renderArrowNext={customNextArrow}
+                            showThumbs={true}
+                        >
+                            {mapImages.map((image, index) => (
+                                <div key={index}>
+                                    <img src={image} alt={`Slide ${index + 1}`} />
+                                </div>
+                            ))}
+                        </Carousel>
+                    </div>
+                    <div style={{ flex: '1', backgroundColor: 'black', padding: '20px' }}>
+                        <h2 style={{ fontSize: '35px', fontWeight: 'bold' }}>Explanations</h2>
+                        <p>Strategies displayed to the left will let you be better at the game.</p>
+                    </div>
+                </div>
+
+
+
             ) : (
-                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems:'center' }}>
 
                     <div>
-                        <img src={'/Planorant_Logo.png'} alt = "" style={{maxWidth:'100%', maxHeight:'100%'}}/>
+                        <img src={'/Planorant_Logo.png'} alt = "" style={{display:'flex', maxWidth:'100%', maxHeight:'100%'}}/>
                     </div>
                     <div style={{
                         border: '1px solid black',
@@ -170,23 +181,22 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        justifyContent: 'center',
-                        height: '30%',
+                        height: '50%',
                         background: 'linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb))',
-                        zIndex: 1
+
                     }}>
-                        <p>
+                        <p style={{ fontSize: '1.5em' }}>
                             {totalCharacters < 5
                                 ? `Select ${5 - totalCharacters} more character${5 - totalCharacters !== 1 ? 's' : ''} to proceed`
-                                : 'Character selection complete'}
+                                : <span style={{ color: 'Chartreuse' }}>Character selection complete</span>}
                         </p>
-                        <p>
+                        <p style={{ fontSize: '1.5em' }}>
                             {selectedMap.length === 0
                                 ? 'Please select a map'
-                                : 'You have selected: ' + selectedMap}
+                                : <span style={{ color: 'Chartreuse' }}>You have selected: {selectedMap}</span>}
                         </p>
                         {showWarning && (
-                            <p style={{ color: 'red',alignItems:'center',textAlign:'center' }}>Poor team composition: Recommended two characters per role</p>
+                            <p style={{ color: 'red',alignItems:'center',textAlign:'center', fontWeight: 'bold' }}>Poor team composition: Recommended two characters per role</p>
                         )}
                     </div>
                 </div>

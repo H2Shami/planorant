@@ -54,19 +54,28 @@ const Characters = ({ characters, onChange }) => {
                         height: "5vw",
                         background: "white",
                         border: "black",
-                        outline: "solid black",
                         cursor: "pointer",
                         margin: "0.5vw",
                         boxShadow: buttonStates[index].clicked
                             ? "0px 0px 10px 5px rgba(255,0,0,1)"
+                            : "none",
+                        animation: buttonStates[index].clicked
+                            ? "color-wave 0.5s ease-in-out, pulse 6s infinite"
                             : "none"
+
                     }}
                     onClick={() => handleClick(index)}
                 >
                     <img
                         src={item.path}
                         alt="Button image"
-                        style={{ display: "block", margin: "auto", maxWidth: "100%", maxHeight: "100%" }}
+                        style={{
+                            display: "block",
+                            margin: "auto",
+                            maxWidth: "100%",
+                            maxHeight: "100%",
+                            background: `linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-mid-rgb)) 50%, rgb(var(--background-end-rgb)))`
+                    }}
                     />
                 </button>
             ))}

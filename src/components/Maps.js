@@ -30,7 +30,7 @@ const Maps = ({maps, onChange}) => {
     }, []);
 
     return (
-        <div>
+        <div style={{ textAlign: 'center' }}>
             {maps.map((item, index) => (
                 <button
                     key={index}
@@ -39,10 +39,14 @@ const Maps = ({maps, onChange}) => {
                         height: '7vw',
                         background: 'black',
                         border: 'black',
-                        outline: 'solid black',
                         cursor: 'pointer',
                         margin: '0.25vw',
-                        boxShadow: buttonStates[index].clicked ? '0px 0px 10px 5px rgba(255,0,0,1)' : 'none',
+                        boxShadow: buttonStates[index].clicked
+                            ? "0px 0px 10px 5px rgba(255,0,0,1)"
+                            : "none",
+                        animation: buttonStates[index].clicked
+                            ? "color-wave 0.5s ease-in-out, pulse 6s infinite"
+                            : "none"
                     }}
                     onClick={() => handleClick(index)}
                 >
