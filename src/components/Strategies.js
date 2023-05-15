@@ -160,7 +160,14 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                             ))}
                         </Carousel>
                     </div>
-                    <div style={{ flex: '1', backgroundColor: 'black', padding: '20px' }}>
+                    <div style={{
+                        flex: '1',
+                        backgroundColor: 'black',
+                        padding: '20px',
+                        boxShadow: '10px 10px 5px darkblue',
+                        border: '2px solid white',
+                        borderRadius: '10px'
+                    }}>
                         <h2 style={{ fontSize: '35px', fontWeight: 'bold' }}>Explanations</h2>
                         <p>Strategies displayed to the left will let you be better at the game.</p>
                     </div>
