@@ -23,14 +23,13 @@ model Map {
 }
 
 model Strategy {
-    name    String
-    duelist Boolean @default(false)
-    controller  Boolean @default(false)
-    initiator   Boolean @default(false)
-    sentinel    Boolean @default(false)
+    name    String  @id @unique
+    character1  String
+    character2  String
+    character3  String
+    character4  String
+    character5  String
     map     String
     explanation String
     path    String  @unique
-
-    @@id([name, duelist, controller, initiator, sentinel, map])
 }

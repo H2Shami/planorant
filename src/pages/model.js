@@ -19,7 +19,7 @@ function getCharacters() {
         "/Character Icons/skye.png",
         "/Character Icons/sova.png",
         "/Character Icons/viper.png",
-        "/Character Icons/wave.png",
+        "/Character Icons/harbor.png",
         "/Character Icons/yoru.png",
     ];
     return characters;
