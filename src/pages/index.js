@@ -10,7 +10,7 @@ import {useState} from "react";
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ characters, maps }) {
+export default function Home({ characters, maps, strats }) {
     const [characterSelection, setCharacterSelection] = useState('');
     const [mapSelection, setMapSelection] = useState('');
 
@@ -37,7 +37,7 @@ export default function Home({ characters, maps }) {
               <Characters characters={characters} onChange={handleCharacters}/>
           </div>
            <div className = {styles.strategies}>
-              <Strategies selectedCharacters={characterSelection} selectedMap={mapSelection}/>
+              <Strategies selectedCharacters={characterSelection} selectedMap={mapSelection} selectedStrat={strats}/>
           </div>
           <div className = {styles.maps}>
               <Maps maps={maps} onChange={handleMaps}/>
@@ -53,6 +53,8 @@ export default function Home({ characters, maps }) {
  */
 export async function getServerSideProps() {
     const prisma = new PrismaClient();
+    
+    const strategyResponse = await prisma.Strategy.findMany();
 
     //Grab all characters
     const characterResponse = await prisma.Character.findMany();
@@ -63,7 +65,8 @@ export async function getServerSideProps() {
     return {
         props: {
             characters: characterResponse,
-            maps: mapResponse
+            maps: mapResponse,
+            strats: strategyResponse
         },
     };
 }
