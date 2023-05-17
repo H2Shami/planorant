@@ -3,8 +3,31 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import {getIcons} from '@/model.js';
 
+function validStrat() {
+    let retval = [];
+    //Iterate through all strategies
+    for (let strats in selectedStrat) {
+        let temp = [];
+        //If the strategy's map is our selected map, grab the characters
+        if (selectedMap === selectedStrat[strats].map) {
+            temp.push(selectedStrat[strats].character1);
+            temp.push(selectedStrat[strats].character2);
+            temp.push(selectedStrat[strats].character3);
+            temp.push(selectedStrat[strats].character4);
+            temp.push(selectedStrat[strats].character5);
 
-
+            retval.push(selectedStrat[strats]);
+            //Check the strategies characters with our selected characters
+            for (let character in selectedCharacters) {
+                if (temp.includes(character) === false) {
+                    retval.pop();
+                    break;
+                }
+            }
+        }
+    }
+    return retval;
+}
 
 const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
 
@@ -141,31 +164,8 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
     //Grab the amount of selected characters from the json
     let totalCharacters = Object.keys(selectedCharacters).length;
 
-    //storing the images of selected maps in mapImages
-    const mapImages = getMapImages(selectedMap);
+    let strategiesToRender = validStrat();
 
-    let charsInStrat = [];
-    function validStrat()
-    {
-        let temp = []
-        for (let strats in selectedStrat) {
-            if(selectedMap === selectedStrat[strats].map)
-            {
-                temp.push(selectedStrat[strats].character1);
-                temp.push(selectedStrat[strats].character2);
-                temp.push(selectedStrat[strats].character3);
-                temp.push(selectedStrat[strats].character4);
-                temp.push(selectedStrat[strats].character5);
-            }
-        }
-        for (let character in selectedCharacters) {
-            if(temp.includes(character) === false){
-                return false;
-            }
-        }
-        charsInStrat.splice(0,temp.length, ...temp);
-        return true;
-    }
     return (
         <>
             {totalCharacters === 5 && selectedMap.length > 0 ? (
@@ -176,7 +176,7 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
                             renderArrowNext={customNextArrow}
                             showThumbs={true}
                         >
-                            {validStrat()?
+                            {strategiesToRender.length > 0 ?
                                 selectedStrat
                                     .filter((selectedStrat) => selectedStrat.map === selectedMap && selectedStrat.character1 === charsInStrat[0] && selectedStrat.character2 === charsInStrat[1] && selectedStrat.character3 === charsInStrat[2] && selectedStrat.character4 === charsInStrat[3] && selectedStrat.character5 === charsInStrat[4])
                                     .map((selectedStrat, index) => (
