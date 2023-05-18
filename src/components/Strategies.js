@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import {getIcons} from '@/model.js';
-import {getMapImages} from '@/model.js';
 
 
 
-const Strategies = ({selectedCharacters, selectedMap}) => {
+const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
 
     const icons = getIcons();
 
@@ -141,8 +140,32 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
     //Grab the amount of selected characters from the json
     let totalCharacters = Object.keys(selectedCharacters).length;
 
-    //storing the images of selected maps in mapImages
-    const mapImages = getMapImages(selectedMap);
+    let desiredStrat = [];
+    function validStrat()
+    {
+        let retval = [];
+        for (let strats in selectedStrat) {  
+            let temp = [];          
+            if(selectedMap === selectedStrat[strats].map)
+            {
+                temp.push(selectedStrat[strats].character1);
+                temp.push(selectedStrat[strats].character2);
+                temp.push(selectedStrat[strats].character3);
+                temp.push(selectedStrat[strats].character4);
+                temp.push(selectedStrat[strats].character5);
+                retval.push(selectedStrat[strats]);
+
+                for (let character in selectedCharacters) {
+                    if(temp.includes(selectedCharacters[character].name) === false){
+                        retval.pop();
+                    }
+                }
+            }
+        
+        }
+        desiredStrat.splice(0,retval.length, ...retval);
+        return true;
+    }
     return (
         <>
             {totalCharacters === 5 && selectedMap.length > 0 ? (
@@ -153,11 +176,19 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
                             renderArrowNext={customNextArrow}
                             showThumbs={true}
                         >
-                            {mapImages.map((image, index) => (
-                                <div key={index}>
-                                    <img src={image} alt={`Slide ${index + 1}`} />
-                                </div>
-                            ))}
+                            {validStrat()?(
+                                desiredStrat.length > 0?
+                                    desiredStrat
+                                    .map((item, index) => (
+                                        <div key={index}>
+                                        <img src={item.path} alt={`Slide ${index + 1}`} />
+                                        </div>
+                                    )):
+                                    (
+                                    <p>In Development</p>
+                                    ) 
+                            ):null
+                            }
                         </Carousel>
                     </div>
                     <div style={{
@@ -212,5 +243,4 @@ const Strategies = ({selectedCharacters, selectedMap}) => {
         </>
     );
 }
-
 export default Strategies;

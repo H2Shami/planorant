@@ -10,7 +10,7 @@ import {useState} from "react";
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ characters, maps }) {
+export default function Home({ characters, maps, strats}) {
     const [characterSelection, setCharacterSelection] = useState('');
     const [mapSelection, setMapSelection] = useState('');
 
@@ -23,6 +23,9 @@ export default function Home({ characters, maps }) {
         setMapSelection(value);
     };
 
+    const handleStrats = (value) => {
+        setStrategySelection(value);
+    };
 
     return (
     <>
@@ -37,7 +40,7 @@ export default function Home({ characters, maps }) {
               <Characters characters={characters} onChange={handleCharacters}/>
           </div>
            <div className = {styles.strategies}>
-              <Strategies selectedCharacters={characterSelection} selectedMap={mapSelection}/>
+              <Strategies selectedCharacters={characterSelection} selectedMap={mapSelection} selectedStrat={strats}/>
           </div>
           <div className = {styles.maps}>
               <Maps maps={maps} onChange={handleMaps}/>
@@ -60,10 +63,13 @@ export async function getServerSideProps() {
     //Only grab maps in competitive rotation
     const mapResponse = await prisma.Map.findMany({where: {inRotation: true}});
 
+    const strategyResponse = await prisma.strategy.findMany();
+
     return {
         props: {
             characters: characterResponse,
-            maps: mapResponse
+            maps: mapResponse,
+            strats: strategyResponse,
         },
     };
 }

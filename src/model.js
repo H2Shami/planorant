@@ -24,28 +24,6 @@ export const getIcons = () =>{
     return icons;
 }
 
-export const getMapImages = (mapName) => {
-    let images = [];
-    switch (mapName) {
-      case "Ascent":
-        images = [
-          "/Strategies/Ascent_A_Split.png",
-          "/Strategies/Ascent_A_Split_2.png",
-          "/Strategies/Ascent_B_Split.png",
-        ];
-        break;
-      case "Pearl":
-        images = [
-          "/Strategies/Pearl_A_Split.png",
-          "/Strategies/Pearl_Mid_Split.png",
-          "/Strategies/Pearl_B_Split.png",
-        ];
-        break;
-      default:
-        break;
-    }
-    return images;
-  };
 // // pages/api/users.js
 // import pool from './db';
 //
