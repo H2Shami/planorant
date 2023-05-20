@@ -176,32 +176,47 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
                             renderArrowNext={customNextArrow}
                             showThumbs={true}
                         >
-                            {validStrat()?(
-                                desiredStrat.length > 0?
-                                    desiredStrat
-                                    .map((item, index) => (
-                                        <div key={index}>
-                                        <img src={item.path} alt={`Slide ${index + 1}`} />
-                                        </div>
-                                    )):
-                                    (
-                                    <p>In Development</p>
-                                    ) 
-                            ):null
-                            }
+                    {validStrat() ? (
+                        desiredStrat.length > 0 ? (
+                            desiredStrat.map((item, index) => (
+                            <div
+                                key={index}
+                                style={{
+                                display: 'flex',
+                                }}
+                            >
+                                <div style={{ width: '70%',height: '100%', padding: '10px' }}>
+                                <img
+                                    src={item.path}
+                                    alt={`Slide ${index + 1}`}
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover'}}
+                                />
+                                </div>
+                                <div
+                                style={{
+                                    flex: '1',
+                                    backgroundColor: 'black',
+                                    padding: '10px',
+                                    boxShadow: '10px 10px 5px darkblue',
+                                    border: '2px solid white',
+                                    borderRadius: '10px',
+                                    height: '100%',
+                                    overflow: 'auto', // Enable scrollbars if necessary
+                                }}
+                                >
+                                <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>Explanations</h2>
+                                <p style={{ fontSize: '16px', lineHeight: '1.5' }}>{item.explanation}</p>
+                                </div>
+                            </div>
+                            ))
+                        ) : (
+                            <p>In Development</p>
+                        )
+                        ) : null}
+
+
                         </Carousel>
-                    </div>
-                    <div style={{
-                        flex: '1',
-                        backgroundColor: 'black',
-                        padding: '20px',
-                        boxShadow: '10px 10px 5px darkblue',
-                        border: '2px solid white',
-                        borderRadius: '10px'
-                    }}>
-                        <h2 style={{ fontSize: '35px', fontWeight: 'bold' }}>Explanations</h2>
-                        <p>Strategies displayed to the left will let you be better at the game.</p>
-                    </div>
+                    </div>  
                 </div>
 
 
