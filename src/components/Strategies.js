@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import {getIcons} from '@/model.js';
 
 
 
@@ -38,7 +37,7 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
                            justifyContent: 'center',
                        }}
                    >
-          <img src={getIcons()[0]} alt="Previous Icon" />
+          <img src={"/valoleft.svg"} alt="Prev Icon" />
         </span>
                     <span
                         style={{
@@ -85,7 +84,7 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
                             justifyContent: 'center',
                         }}
                     >
-          <img src={getIcons()[1]} alt="Next Icon" />
+          <img src={"/valoright.svg"} alt="Next Icon" />
         </span>
                     <span
                         style={{
