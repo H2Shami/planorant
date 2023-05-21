@@ -11,6 +11,7 @@ import {useState} from "react";
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({ characters, maps, strats}) {
+    //keep track of state of selected character options to pass between components
     const [characterSelection, setCharacterSelection] = useState('');
     const [mapSelection, setMapSelection] = useState('');
 
@@ -63,8 +64,10 @@ export async function getServerSideProps() {
     //Only grab maps in competitive rotation
     const mapResponse = await prisma.Map.findMany({where: {inRotation: true}});
 
+    //Grab all strategies now instead of risking too many database calls
     const strategyResponse = await prisma.strategy.findMany();
 
+    //pass them to our app
     return {
         props: {
             characters: characterResponse,

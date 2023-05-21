@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const Maps = ({maps, onChange}) => {
-
+    //State variables to see which maps are clicked
     const [buttonStates, setButtonStates] = useState(
         maps.map(() => ({ clicked: false }))
     );
@@ -11,17 +11,21 @@ const Maps = ({maps, onChange}) => {
     const handleClick = (index) => {
         const newButtonStates = [...buttonStates];
         const clicked = newButtonStates[index].clicked;
+        //Only edit the state if elligible
         if (clickedCount < 1 || clicked) {
             newButtonStates[index] = {
                 ...newButtonStates[index],
                 clicked: !clicked
             };
+            //increment clicked count accordingly
             setclickedCount(clicked ? clickedCount - 1 : clickedCount + 1);
             setButtonStates(newButtonStates);
+            //pass clicked map name to parent component
             onChange(clicked ? '' : maps[index].name);
         }
     };
 
+    //Find out which of our maps is clicked so we can display the name
     const selectedButtons = buttonStates.reduce((acc, curr, index) => {
         if (curr.clicked) {
             acc.push(maps[index].name);
@@ -29,6 +33,7 @@ const Maps = ({maps, onChange}) => {
         return acc;
     }, []);
 
+    //Render the array of maps and give them an index to help our state
     return (
         <div style={{ textAlign: 'center' }}>
             {maps.map((item, index) => (

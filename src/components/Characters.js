@@ -15,6 +15,7 @@ const Characters = ({ characters, onChange }) => {
     const handleClick = (index) => {
         const newButtonStates = [...buttonStates];
         const clicked = newButtonStates[index].clicked;
+        //Only edit what's been clicked if elligible
         if (clickedCount < 5 || clicked) {
             newButtonStates[index] = {
                 ...newButtonStates[index],
@@ -29,6 +30,7 @@ const Characters = ({ characters, onChange }) => {
                     selectedCharacters.push(character);
                 }
             });
+            //Pass the selected characters to parent component
             onChange(selectedCharacters);
         }
     };
@@ -42,7 +44,7 @@ const Characters = ({ characters, onChange }) => {
         return acc;
     }, []);
 
-    // Render the component
+    // Render the array of characters with an index to help state keep track of them
     return (
         <>
             <div>
