@@ -166,7 +166,7 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
     return (
         <>
             {totalCharacters === 5 && selectedMap.length > 0 ? (
-                <div style={{ display: 'flex',height: '75%', alignItems:'center'}}>
+                <div style={{ display: 'flex',height: '100%', alignItems:'center'}}>
                     <div style={{ flex: '3', marginRight: '20px'}}>
                         {validStrat() && desiredStrat.length > 0 ? (
                             <Carousel
