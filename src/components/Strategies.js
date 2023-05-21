@@ -7,8 +7,6 @@ import {getIcons} from '@/model.js';
 
 const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
 
-    const icons = getIcons();
-
     const customPrevArrow = (onClickHandler, hasPrev, label) => {
         return (
             hasPrev && (
