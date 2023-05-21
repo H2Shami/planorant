@@ -2,20 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+To run the code, you must have npm package manager installed
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-next dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
+Then, make sure you have all required dependencies installed
 The dependencies needed and used are as follows:
 ```bash
  "dependencies": {
@@ -34,4 +23,17 @@ The dependencies needed and used are as follows:
   }
 ```
 
-The website can be viewed at [Planorant](https://planorant-8tmro2zmz-h2shami.vercel.app)
+If you need to install any packages, you can use the following command:
+```bash
+npm install [package-name]@[version-number]
+```
+
+Finally, run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+The website can also be viewed [here](https://planorant.vercel.app)
