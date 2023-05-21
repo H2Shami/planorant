@@ -195,7 +195,6 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
                                     flex: '1',
                                     backgroundColor: 'black',
                                     padding: '10px',
-                                    boxShadow: '10px 10px 5px darkblue',
                                     border: '2px solid white',
                                     borderRadius: '10px',
                                     height: '100%',
