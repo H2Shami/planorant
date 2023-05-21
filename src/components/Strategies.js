@@ -166,57 +166,60 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
     return (
         <>
             {totalCharacters === 5 && selectedMap.length > 0 ? (
-                <div style={{ display: 'flex' }}>
-                    <div style={{ flex: '3', marginRight: '20px' }}>
-                        <Carousel
-                            renderArrowPrev={customPrevArrow}
-                            renderArrowNext={customNextArrow}
-                            showThumbs={true}
-                        >
-                    {validStrat() ? (
-                        desiredStrat.length > 0 ? (
-                            desiredStrat.map((item, index) => (
+                <div style={{ display: 'flex',height: '75%', alignItems:'center'}}>
+                    <div style={{ flex: '3', marginRight: '20px'}}>
+                        {validStrat() && desiredStrat.length > 0 ? (
+                            <Carousel
+                                renderArrowPrev={customPrevArrow}
+                                renderArrowNext={customNextArrow}
+                                showThumbs={true}
+                            >
+                                {desiredStrat.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        style={{
+                                            display: 'flex',
+                                        }}
+                                    >
+                                        <div style={{ width: '70%', height: '100%', padding: '10px' }}>
+                                            <img
+                                                src={item.path}
+                                                alt={`Slide ${index + 1}`}
+                                                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                            />
+                                        </div>
+                                        <div
+                                            style={{
+                                                flex: '1',
+                                                backgroundColor: 'black',
+                                                padding: '10px',
+                                                border: '2px solid white',
+                                                borderRadius: '10px',
+                                                height: '100%',
+                                                overflow: 'auto', // Enable scrollbars if necessary
+                                            }}
+                                        >
+                                            <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>Explanations</h2>
+                                            <p style={{ fontSize: '16px', lineHeight: '1.5' }}>{item.explanation}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </Carousel>
+                        ) : (
                             <div
-                                key={index}
                                 style={{
-                                display: 'flex',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    borderRadius: '10px',
+                                    padding: '10px',
                                 }}
                             >
-                                <div style={{ width: '70%',height: '100%', padding: '10px' }}>
-                                <img
-                                    src={item.path}
-                                    alt={`Slide ${index + 1}`}
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover'}}
-                                />
-                                </div>
-                                <div
-                                style={{
-                                    flex: '1',
-                                    backgroundColor: 'black',
-                                    padding: '10px',
-                                    border: '2px solid white',
-                                    borderRadius: '10px',
-                                    height: '100%',
-                                    overflow: 'auto', // Enable scrollbars if necessary
-                                }}
-                                >
-                                <h2 style={{ fontSize: '24px', fontWeight: 'bold' }}>Explanations</h2>
-                                <p style={{ fontSize: '16px', lineHeight: '1.5' }}>{item.explanation}</p>
-                                </div>
+                                <p style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bold' }}>In Development</p>
                             </div>
-                            ))
-                        ) : (
-                            <p>In Development</p>
-                        )
-                        ) : null}
-
-
-                        </Carousel>
-                    </div>  
+                        )}
+                    </div>
                 </div>
-
-
-
             ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems:'center' }}>
 
@@ -252,7 +255,6 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
                         )}
                     </div>
                 </div>
-
             )}
         </>
     );
