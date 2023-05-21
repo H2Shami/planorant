@@ -79,9 +79,6 @@ const Characters = ({ characters, onChange }) => {
                     />
                 </button>
             ))}
-            <div>
-                Selected Characters: {selectedButtons?.join(", ")}
-            </div>
             </div>
         </>
     );
