@@ -33,3 +33,5 @@ The dependencies needed and used are as follows:
     "prisma": "^4.13.0"
   }
 ```
+
+The website can be viewed at [Planorant](https://planorant-8tmro2zmz-h2shami.vercel.app)
