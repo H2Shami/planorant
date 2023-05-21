@@ -17,6 +17,7 @@ next dev
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 The dependencies needed and used are as follows:
+```bash
  "dependencies": {
     "@prisma/client": "^4.13.0",
     "bootstrap": "^5.2.3",
@@ -31,3 +32,4 @@ The dependencies needed and used are as follows:
   "devDependencies": {
     "prisma": "^4.13.0"
   }
+```
