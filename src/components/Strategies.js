@@ -235,6 +235,9 @@ const Strategies = ({selectedCharacters, selectedMap, selectedStrat}) => {
                         background: 'linear-gradient(to bottom, rgb(var(--background-start-rgb)), rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb))',
 
                     }}>
+                        <p style={{ fontSize: '1.5em', color: 'Chartreuse' }}>
+                            To receive strategy:
+                        </p>
                         <p style={{ fontSize: '1.5em' }}>
                             {totalCharacters < 5
                                 ? `Select ${5 - totalCharacters} more character${5 - totalCharacters !== 1 ? 's' : ''} to proceed`
